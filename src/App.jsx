@@ -18,7 +18,7 @@ import Nosotros from "./pages/Nosotros";
 import IniciaNegocio from "./pages/IniciaNegocio";
 import Promociones from "./pages/Promociones";
 import ProyectosEmpresariales from "./pages/ProyectosEmpresariales";
-import Productos from "./pages/productos";
+import Productos from "./pages/Productos"; // ✅ CORREGIDO (antes tenía la p en minúscula)
 import Carrito from "./pages/Carrito";
 import Login from "./pages/logins/Login";
 import Register from "./pages/logins/Register";
@@ -26,6 +26,7 @@ import ForgotPassword from "./pages/logins/ForgotPassword";
 import ResetPassword from "./pages/logins/ResetPassword";
 import NotFound from "./pages/NotFound";
 
+// Envoltura para animación entre rutas
 const PageWrapper = ({ children }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -37,6 +38,7 @@ const PageWrapper = ({ children }) => (
   </motion.div>
 );
 
+// Contenido principal con Navbar, Footer y Rutas
 function AppContent() {
   const location = useLocation();
   const hideLayoutRoutes = [
@@ -75,6 +77,7 @@ function AppContent() {
   );
 }
 
+// Componente raíz envuelto en Router
 function App() {
   return (
     <Router>
