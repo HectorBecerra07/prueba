@@ -54,7 +54,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 👇 Aquí se inserta el componente completo */}
+      
       <IniciaNegocio />
     </div>
   );

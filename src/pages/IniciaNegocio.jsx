@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Modal from "../components/Modal";
+import { useNavigate } from "react-router-dom";
 
 const modelos = [
   {
@@ -21,20 +20,18 @@ const modelos = [
     nombre: "Vending de Limpieza",
     imagen: "/img/purificadora-premium.png",
     precio: 23000,
-    descripcion: "Automatizada para una venta de productos de limpieza.",
+    descripcion: "Automatizada para venta de productos de limpieza.",
   },
 ];
 
-const IniciaNegocio = () => {
-  const [modeloSeleccionado, setModeloSeleccionado] = useState(null);
-  const [mostrarModal, setMostrarModal] = useState(false);
+const IniciaNegocio = ({ showBackButton = true }) => {
+  const navigate = useNavigate();
 
   return (
-    <div id="inicia-negocio" className="bg-white py-20 px-4">
+    <div id="inicia-negocio" className="bg-gray py-20 px-4">
       <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
         Inicia tu negocio con tu purificadora
       </h2>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {modelos.map((modelo) => (
           <div
@@ -48,43 +45,28 @@ const IniciaNegocio = () => {
             />
             <div className="p-4">
               <h3 className="text-lg font-semibold mb-1 text-gray-800">{modelo.nombre}</h3>
-              <p className="text-sm text-gray-600 mb-2">
-                Desde ${modelo.precio.toLocaleString()} MXN
-              </p>
-              <div className="flex justify-between mt-4">
-                <button
-                  onClick={() => {
-                    setModeloSeleccionado(modelo);
-                    setMostrarModal(true);
-                  }}
-                  className="text-sm text-blue-600 underline"
-                >
-                  Conoce más
-                </button>
-                <button className="text-sm bg-[#24d4da] text-white px-3 py-1 rounded-lg hover:opacity-90">
-                  Configúralo
-                </button>
-              </div>
+              <p className="text-sm text-gray-600 mb-2">Desde ${modelo.precio.toLocaleString()} MXN</p>
+              <p className="text-sm text-gray-600 mb-4">{modelo.descripcion}</p>
+              <button
+                onClick={() => navigate(`/configurar/${modelo.id}`)}
+                className="text-sm bg-[#24d4da] text-white px-3 py-1 rounded-lg hover:opacity-90"
+              >
+                Configúralo
+              </button>
             </div>
           </div>
         ))}
       </div>
 
-      {mostrarModal && modeloSeleccionado && (
-        <Modal onClose={() => setMostrarModal(false)}>
-          <div className="text-center">
-            <h2 className="text-2xl font-bold mb-4">{modeloSeleccionado.nombre}</h2>
-            <img
-              src={modeloSeleccionado.imagen}
-              alt={modeloSeleccionado.nombre}
-              className="mx-auto h-48 object-contain mb-4"
-            />
-            <p className="text-gray-700 mb-4">{modeloSeleccionado.descripcion}</p>
-            <p className="font-semibold">
-              Precio desde: ${modeloSeleccionado.precio.toLocaleString()} MXN
-            </p>
-          </div>
-        </Modal>
+      {showBackButton && (
+        <div className="mt-10 text-center">
+          <button
+            onClick={() => navigate("/")}
+            className="bg-gray-800 text-white px-5 py-2 rounded-lg hover:bg-gray-700 transition"
+          >
+            Volver al Inicio
+          </button>
+        </div>
       )}
     </div>
   );

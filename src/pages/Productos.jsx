@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
 import Modal from "../pages/ModalProductos";
 import { useCarrito } from "../context/CarritoContext";
 import toast from "react-hot-toast";
@@ -12,7 +11,9 @@ const productos = categorias.flatMap((categoria, catIndex) =>
     id: catIndex * 10 + i + 1,
     nombre: `${categoria.slice(0, -1)} ${i + 1}`,
     descripcion: `Descripción del ${categoria.slice(0, -1).toLowerCase()} ${i + 1}`,
-    imagen: `https://via.placeholder.com/150?text=${encodeURIComponent(categoria.slice(0, -1))}+${i + 1}`,
+    precioAntes: 5000,
+    precioActual: 4200,
+    imagen: `https://via.placeholder.com/300x300?text=${encodeURIComponent(categoria.slice(0, -1))}+${i + 1}`,
     categoria,
   }))
 );
@@ -32,7 +33,6 @@ const Productos = () => {
   const [productoActivo, setProductoActivo] = useState(null);
 
   const { agregarProducto } = useCarrito();
-  const carruselRef = useRef(null);
 
   const handleAgregarCarrito = (producto) => {
     agregarProducto(producto);
@@ -44,26 +44,19 @@ const Productos = () => {
     setModalOpen(true);
   };
 
-  const scrollCarrusel = (direction) => {
-    if (!carruselRef.current) return;
-    const scrollAmount = 300;
-    carruselRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <section className="p-6">
-      <h2 className="text-3xl font-bold mb-8 text-center">Productos para Purificadoras</h2>
+    <section className="p-6 max-w-7xl mx-auto">
+      <h2 className="text-3xl font-bold mb-12 text-center uppercase tracking-wide">
+        Componentes para Purificadoras
+      </h2>
 
-      {/* Barra de categorías */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
+      {/* Categorías */}
+      <div className="flex flex-wrap justify-center gap-3 mb-12">
         {categorias.map((cat) => (
           <button
             key={cat}
             onClick={() => setCategoriaActiva(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+            className={`px-6 py-2 rounded-full text-sm font-medium border transition ${
               cat === categoriaActiva
                 ? "text-white"
                 : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
@@ -79,55 +72,36 @@ const Productos = () => {
         ))}
       </div>
 
-      {/* Carrusel de productos de la categoría activa */}
-      <div className="relative mb-12">
-        <button
-          onClick={() => scrollCarrusel("left")}
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white shadow p-2 rounded-full z-10 hover:bg-gray-100"
-        >
-          ‹
-        </button>
-        <button
-          onClick={() => scrollCarrusel("right")}
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white shadow p-2 rounded-full z-10 hover:bg-gray-100"
-        >
-          ›
-        </button>
+      {/* Grid estilo Lacoste */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {productosPorCategoria[categoriaActiva].map((producto) => (
+          <div
+            key={producto.id}
+            className="flex flex-col items-center gap-2"
+            onClick={() => handleVerMas(producto)}
+          >
+            <div className="bg-gray-50 w-full aspect-square flex items-center justify-center rounded-xl p-4">
+              <img
+                src={producto.imagen}
+                alt={producto.nombre}
+                className="object-contain max-h-[150px]"
+              />
+            </div>
 
-        <div ref={carruselRef} className="overflow-x-auto scrollbar-hide px-8">
-          <motion.div className="flex gap-4 w-max" drag="x" dragConstraints={{ left: -2000, right: 0 }}>
-            {productosPorCategoria[categoriaActiva].map((producto) => (
-              <motion.div
-                key={producto.id}
-                className="min-w-[250px] bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition-all cursor-grab active:cursor-grabbing"
-                whileTap={{ scale: 0.95 }}
-              >
-                <img
-                  src={producto.imagen}
-                  alt={producto.nombre}
-                  className="w-full h-40 object-cover rounded-xl mb-4"
-                />
-                <h4 className="text-lg font-semibold">{producto.nombre}</h4>
-                <p className="text-sm text-gray-600 mb-4">{producto.descripcion}</p>
-                <div className="flex justify-between gap-2">
-                  <button
-                    onClick={() => handleAgregarCarrito(producto)}
-                    className="text-white px-3 py-1 rounded-xl text-sm transition"
-                    style={{ backgroundColor: "#24d4da" }}
-                  >
-                    Añadir al carrito
-                  </button>
-                  <button
-                    onClick={() => handleVerMas(producto)}
-                    className="border border-gray-400 text-gray-800 px-3 py-1 rounded-xl text-sm hover:bg-gray-100 transition"
-                  >
-                    Ver más
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+            <p className="text-center text-sm font-medium">{producto.nombre}</p>
+            <p className="text-center text-black text-sm font-bold">MXN ${producto.precioActual.toFixed(2)}</p>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleAgregarCarrito(producto);
+              }}
+              className="text-white bg-[#24d4da] px-4 py-1 rounded-full text-xs hover:bg-gray-900"
+            >
+              Añadir al carrito
+            </button>
+          </div>
+        ))}
       </div>
 
       <Modal
