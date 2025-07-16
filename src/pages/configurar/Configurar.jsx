@@ -1,40 +1,25 @@
-import { useState } from "react";
-import Step1SelectModel from "../../components/Step1SelectModel";
-import Step2ModelDetails from "../../components/Step2ModelDetails";
-import Step3ExtrasConfigurator from "../../components/Step3ExtrasConfigurator";
-import Step4Summary from "../../components/Step4Summary";
+import React from "react";
 
-export default function ConfiguradorPage() {
-  const [paso, setPaso] = useState(1);
-  const [modelo, setModelo] = useState(null);
-  const [extras, setExtras] = useState([]);
-
+export default function Configurar() {
   return (
-    <div className="min-h-screen bg-white py-10 px-4">
-      {paso === 1 && (
-        <Step1SelectModel
-          onSelect={setModelo}
-          onNext={() => setPaso(2)}
-        />
-      )}
-      {paso === 2 && modelo && (
-        <Step2ModelDetails
-          modelo={modelo}
-          onNext={() => setPaso(3)}
-        />
-      )}
-      {paso === 3 && (
-        <Step3ExtrasConfigurator
-          onSelect={setExtras}
-          onNext={() => setPaso(4)}
-        />
-      )}
-      {paso === 4 && (
-        <Step4Summary
-          modelo={modelo}
-          extras={extras}
-        />
-      )}
+    <div className="max-w-4xl mx-auto py-20">
+      <h1 className="text-4xl font-bold mb-8 text-center">Configuración</h1>
+
+      <div className="space-y-6">
+        <p className="text-gray-700">
+          Aquí podrás configurar todas las opciones de tu purificadora o vending.
+        </p>
+
+        <div className="p-6 border rounded-xl">
+          <h2 className="text-xl font-semibold mb-4">Opciones generales</h2>
+          <p className="text-gray-600">Esta sección se actualizará pronto para permitir personalización avanzada.</p>
+        </div>
+
+        <div className="p-6 border rounded-xl">
+          <h2 className="text-xl font-semibold mb-4">Información de contacto</h2>
+          <p className="text-gray-600">Agrega aquí tu correo, teléfono y dirección para tus cotizaciones.</p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@
   "description": "Frontend del sitio Darmax con React, Vite y Tailwind",
   "author": "Héctor Rivera",
   "license": "ISC",
-  "homepage": ".", 
+  "homepage": ".",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,6 +17,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.23.3",
     "html2pdf.js": "^0.10.3",
+    "jspdf": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.5.2",

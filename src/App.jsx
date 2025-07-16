@@ -1,8 +1,4 @@
-import {
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Navbar from "./components/Navbar";
@@ -20,10 +16,8 @@ import Register from "./pages/logins/Register";
 import ForgotPassword from "./pages/logins/ForgotPassword";
 import ResetPassword from "./pages/logins/ResetPassword";
 import NotFound from "./pages/NotFound";
-
-// Nuevas rutas bien separadas
-import ConfiguradorPage from "./pages/configurar/Configurar";
 import Configurar from "./pages/configurar/Configurar";
+import WizardGeneral from "./pages/WizardGeneral";
 
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -59,8 +53,8 @@ function AppContent() {
             <Route path="/promociones" element={<PageWrapper><Promociones /></PageWrapper>} />
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
             <Route path="/carrito" element={<PageWrapper><Carrito /></PageWrapper>} />
-            <Route path="/configurar" element={<PageWrapper><ConfiguradorPage /></PageWrapper>} />
             <Route path="/configurar/:id" element={<PageWrapper><Configurar /></PageWrapper>} />
+            <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} /> {/* ✅ Ruta corregida */}
             <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
