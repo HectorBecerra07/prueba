@@ -9,7 +9,8 @@ import Nosotros from "./pages/Nosotros";
 import IniciaNegocio from "./pages/IniciaNegocio";
 import Promociones from "./pages/Promociones";
 import ProyectosEmpresariales from "./pages/ProyectosEmpresariales";
-import Productos from "./pages/productos";
+// Correcto si el archivo es Productos.jsx
+import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/logins/Login";
 import Register from "./pages/logins/Register";
