@@ -1,5 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -17,6 +19,9 @@ import ResetPassword from "./pages/logins/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Configurar from "./pages/configurar/Configurar";
 import WizardGeneral from "./pages/WizardGeneral";
+
+// Configura tu clave pública de Stripe
+const stripePromise = loadStripe("TU_CLAVE_PUBLICA_DE_STRIPE");
 
 const PageWrapper = ({ children }) => (
   <motion.div
@@ -51,7 +56,14 @@ function AppContent() {
             <Route path="/inicia-tu-negocio" element={<PageWrapper><IniciaNegocio /></PageWrapper>} />
             <Route path="/promociones" element={<PageWrapper><Promociones /></PageWrapper>} />
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
-            <Route path="/carrito" element={<PageWrapper><Carrito /></PageWrapper>} />
+
+            {/* Aquí envuelves solo la ruta del carrito con Elements */}
+            <Route path="/carrito" element={
+              <Elements stripe={stripePromise}>
+                <PageWrapper><Carrito /></PageWrapper>
+              </Elements>
+            } />
+
             <Route path="/configurar/:id" element={<PageWrapper><Configurar /></PageWrapper>} />
             <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} />
             <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />

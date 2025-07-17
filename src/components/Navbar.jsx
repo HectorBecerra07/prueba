@@ -7,7 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link, useLocation } from "react-router-dom";
 import { useCarrito } from "../context/CarritoContext";
-import SlideCart from "./SlideCart";
+import CarritoLateral from "./CarritoLateral";
 
 export default function NavBar() {
   const [navOpen, setNavOpen] = useState(false);
@@ -56,7 +56,6 @@ export default function NavBar() {
           </div>
         </div>
 
-        {/* ✅ Mobile dropdown, desde arriba */}
         <div className={`absolute top-0 right-0 w-full md:hidden transform transition-all duration-300 ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"} bg-white rounded-b-3xl shadow-xl`}>
           <div className="flex justify-end p-4">
             <button onClick={() => setNavOpen(false)}>
@@ -73,7 +72,7 @@ export default function NavBar() {
         </div>
       </nav>
 
-      <SlideCart isOpen={showCart} onClose={() => setShowCart(false)} />
+      <CarritoLateral isOpen={showCart} onClose={() => setShowCart(false)} />
     </>
   );
 }

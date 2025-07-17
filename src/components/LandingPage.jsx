@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import IniciaNegocio from "../pages/IniciaNegocio";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import CalculadoraNegocio from "../components/CalculadoraNegocio";
 
 export default function LandingPage() {
   const handleScroll = () => {
@@ -9,28 +8,6 @@ export default function LandingPage() {
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
-  };
-
-  const [precioGarrafon, setPrecioGarrafon] = useState(18);
-  const [garrafonesDia, setGarrafonesDia] = useState(50);
-  const [costoServicios, setCostoServicios] = useState(4065);
-  const [costoRenta, setCostoRenta] = useState(0);
-  const [costoInsumos, setCostoInsumos] = useState(300);
-
-  const ingresosDiarios = garrafonesDia * precioGarrafon;
-  const gastosDiarios = (costoServicios / 30) + (costoRenta / 30) + costoInsumos;
-  const utilidadDiaria = ingresosDiarios - gastosDiarios;
-  const utilidadMensual = utilidadDiaria * 30;
-  const utilidadAnual = utilidadMensual * 12;
-
-  const productos = [
-    { id: 1, nombre: "Refacción Filtro", precio: 250 },
-    { id: 2, nombre: "Botella 20L", precio: 120 },
-    { id: 3, nombre: "Dispensador Automático", precio: 1500 },
-  ];
-
-  const handleAddToCart = (nombre) => {
-    alert(`Agregado al carrito: ${nombre}`);
   };
 
   return (
@@ -64,99 +41,7 @@ export default function LandingPage() {
       </section>
 
       <IniciaNegocio />
-
-      <section id="calculadora" className="w-screen py-20 flex justify-center px-4 md:px-16">
-        <div className="bg-[#0c80c7] max-w-5xl w-full rounded-xl shadow-2xl overflow-hidden grid md:grid-cols-2 text-white">
-          <div className="p-10 space-y-6">
-            <h2 className="text-lg font-bold">PRECIO POR GARRAFÓN</h2>
-            <input
-              type="range"
-              min="10"
-              max="50"
-              value={precioGarrafon}
-              onChange={(e) => setPrecioGarrafon(Number(e.target.value))}
-              className="w-full accent-[#ccff00]"
-            />
-            <p className="text-center text-2xl font-bold text-[#ccff00]">${precioGarrafon}</p>
-
-            <h2 className="text-lg font-bold mt-6">COLOCA LOS VALORES EN LA CAJA</h2>
-            <div className="grid gap-4">
-              <div className="flex flex-col">
-                <label className="text-sm">Garrafones vendidos por día</label>
-                <input
-                  type="number"
-                  value={garrafonesDia}
-                  onChange={(e) => setGarrafonesDia(Number(e.target.value))}
-                  className="text-black p-2 rounded"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-sm">Pago mensual de servicios (luz + agua)</label>
-                <input
-                  type="number"
-                  value={costoServicios}
-                  onChange={(e) => setCostoServicios(Number(e.target.value))}
-                  className="text-black p-2 rounded"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-sm">Renta de local (opcional)</label>
-                <input
-                  type="number"
-                  value={costoRenta}
-                  onChange={(e) => setCostoRenta(Number(e.target.value))}
-                  className="text-black p-2 rounded"
-                />
-              </div>
-              <div className="flex flex-col">
-                <label className="text-sm">Costo insumos mensual</label>
-                <input
-                  type="number"
-                  value={costoInsumos}
-                  onChange={(e) => setCostoInsumos(Number(e.target.value))}
-                  className="text-black p-2 rounded"
-                />
-              </div>
-              <button className="w-full bg-[#ff5733] py-2 rounded font-bold">RESETEAR VALORES</button>
-            </div>
-          </div>
-
-          <div className="bg-[#3ab0e2] p-10 space-y-4 flex flex-col justify-center">
-            <h2 className="text-lg font-bold">RESULTADOS</h2>
-            <div className="grid grid-cols-3 gap-3 text-center text-xs font-medium">
-              <div>
-                <p>Ingresos diarios</p>
-                <p className="font-bold">${ingresosDiarios.toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Gastos diarios</p>
-                <p className="font-bold">${gastosDiarios.toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Utilidad neta diaria</p>
-                <p className="font-bold">${utilidadDiaria.toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Ingresos mensuales</p>
-                <p className="font-bold">${(ingresosDiarios * 30).toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Gastos mensuales</p>
-                <p className="font-bold">${(gastosDiarios * 30).toFixed(2)}</p>
-              </div>
-              <div>
-                <p>Utilidad mensual</p>
-                <p className="font-bold">${utilidadMensual.toFixed(2)}</p>
-              </div>
-              <div className="col-span-3">
-                <p>Utilidad anual</p>
-                <p className="font-bold">${utilidadAnual.toFixed(2)}</p>
-              </div>
-            </div>
-            <p className="text-xs mt-4">Calcula tu ganancia tomando en cuenta el margen que desees obtener.</p>
-          </div>
-        </div>
-      </section>
+      <CalculadoraNegocio />
     </div>
   );
 }

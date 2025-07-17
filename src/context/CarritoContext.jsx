@@ -1,19 +1,15 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-// Crear contexto
 const CarritoContext = createContext();
 
-// Hook personalizado
 export const useCarrito = () => useContext(CarritoContext);
 
-// Proveedor
 export const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState(() => {
     const data = localStorage.getItem("carrito");
     return data ? JSON.parse(data) : [];
   });
 
-  // Persistencia en localStorage
   useEffect(() => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   }, [carrito]);
@@ -27,9 +23,8 @@ export const CarritoProvider = ({ children }) => {
             ? { ...p, cantidad: p.cantidad + producto.cantidad }
             : p
         );
-      } else {
-        return [...prev, { ...producto }];
       }
+      return [...prev, { ...producto }];
     });
   };
 

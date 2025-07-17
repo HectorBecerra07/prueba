@@ -34,7 +34,11 @@ const Productos = () => {
   const { agregarProducto } = useCarrito();
 
   const handleAgregarCarrito = (producto) => {
-    agregarProducto(producto);
+    agregarProducto({
+      ...producto,
+      cantidad: 1,
+      precio: producto.precioActual, // 👈 Aquí mandas bien el precio
+    });
     toast.success(`${producto.nombre} añadido al carrito 🎉`);
   };
 
