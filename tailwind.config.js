@@ -1,4 +1,3 @@
-// tailwind.config.js
 export default {
   content: [
     "./index.html",
@@ -6,8 +5,18 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#24d4da",
+        secondary: "#1b9b9f",
+        accent: "#ccff00",
+        textDark: "#333333",
+      },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
+      },
+      backgroundImage: {
+        'gradient-negocio':
+          "linear-gradient(to bottom, #24d4da, #24d4da, #24d4da, #24d4da, #24d4da, #0ad9d6, #00ded0, #00e2c9, #00eab1, #19f18e, #5bf560, #8df607)"
       },
       keyframes: {
         waveRise: {

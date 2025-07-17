@@ -56,7 +56,10 @@ export default function Promociones() {
                 {promo.titulo}
               </h3>
               <p className="text-gray-600 text-sm mb-4">{promo.descripcion}</p>
-              <button className="bg-[#24d4da] text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#1cbcc3] transition">
+              <button
+                className="px-4 py-2 rounded-lg font-semibold text-sm text-black hover:brightness-90 transition"
+                style={{ backgroundColor: "#ccff00" }}
+              >
                 Aprovechar ahora
               </button>
             </div>

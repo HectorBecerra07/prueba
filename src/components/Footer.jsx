@@ -3,13 +3,15 @@ import {
   FaInstagram,
   FaWhatsapp,
   FaTiktok,
+  FaCreditCard,
+  FaMoneyCheckAlt,
 } from "react-icons/fa";
+import { SiMercadopago } from "react-icons/si";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white pt-12 pb-6 px-6 mt-20">
+    <footer className="bg-black text-white pt-12 pb-6 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Mapa */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Ubicación</h3>
           <iframe
@@ -25,7 +27,6 @@ const Footer = () => {
           ></iframe>
         </div>
 
-        {/* Información de contacto */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Contáctanos</h3>
           <p className="mb-2">Purificadora de Agua Darmax</p>
@@ -37,51 +38,32 @@ const Footer = () => {
           <p className="mb-2">Email: contacto@darmax.com</p>
         </div>
 
-        {/* Redes sociales */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Síguenos</h3>
-          <div className="flex space-x-5 text-2xl">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="hover:text-sky-400 transition-colors"
-            >
+          <div className="flex space-x-5 text-2xl mb-6">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-sky-400">
               <FaFacebookF />
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="hover:text-pink-400 transition-colors"
-            >
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400">
               <FaInstagram />
             </a>
-            <a
-              href="https://wa.me/525512345678"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="WhatsApp"
-              className="hover:text-green-400 transition-colors"
-            >
+            <a href="https://wa.me/525512345678" target="_blank" rel="noopener noreferrer" className="hover:text-green-400">
               <FaWhatsapp />
             </a>
-            <a
-              href="https://www.tiktok.com/@tunombredeusuario"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-              className="hover:text-pink-400 transition-colors"
-            >
+            <a href="https://www.tiktok.com/@tunombredeusuario" target="_blank" rel="noopener noreferrer" className="hover:text-pink-400">
               <FaTiktok />
             </a>
+          </div>
+
+          <h3 className="text-xl font-semibold mb-4">Aceptamos</h3>
+          <div className="flex space-x-6 text-3xl">
+            <FaMoneyCheckAlt title="Transferencia Bancaria" />
+            <SiMercadopago title="Mercado Pago" />
+            <FaCreditCard title="Tarjetas de Crédito/Débito" />
           </div>
         </div>
       </div>
 
-      {/* Línea inferior */}
       <div className="border-t border-gray-700 mt-10 pt-4 text-center text-gray-400 text-sm">
         &copy; {new Date().getFullYear()} Darmax. Todos los derechos reservados.
       </div>

@@ -4,12 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LandingPage from "./components/LandingPage";
-
 import Nosotros from "./pages/Nosotros";
 import IniciaNegocio from "./pages/IniciaNegocio";
 import Promociones from "./pages/Promociones";
 import ProyectosEmpresariales from "./pages/ProyectosEmpresariales";
-// Correcto si el archivo es Productos.jsx
 import Productos from "./pages/Productos";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/logins/Login";
@@ -44,7 +42,7 @@ function AppContent() {
   return (
     <>
       {!hideLayout && <Navbar />}
-      <main className="p-6 min-h-[calc(100vh-200px)]">
+      <main className="w-screen overflow-x-hidden">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
@@ -55,7 +53,7 @@ function AppContent() {
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
             <Route path="/carrito" element={<PageWrapper><Carrito /></PageWrapper>} />
             <Route path="/configurar/:id" element={<PageWrapper><Configurar /></PageWrapper>} />
-            <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} /> {/* ✅ Ruta corregida */}
+            <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} />
             <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />

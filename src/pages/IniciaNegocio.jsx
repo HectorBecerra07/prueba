@@ -54,7 +54,8 @@ const IniciaNegocio = () => {
 
               <button
                 onClick={() => navigate(`/configurar-maquina/${modelo.id}`)}
-                className="w-full bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800"
+                className="w-full text-black py-2 rounded-lg font-medium hover:brightness-90"
+                style={{ backgroundColor: "#ccff00" }}
               >
                 Configurar esta opción
               </button>
@@ -66,7 +67,8 @@ const IniciaNegocio = () => {
       <div className="mt-16 text-center">
         <button
           onClick={() => navigate("/")}
-          className="bg-gray-800 text-white px-6 py-3 rounded-lg text-lg hover:bg-gray-700 transition"
+          className="px-6 py-3 rounded-lg text-lg font-semibold hover:brightness-90"
+          style={{ backgroundColor: "#ccff00", color: "black" }}
         >
           Volver al Inicio
         </button>

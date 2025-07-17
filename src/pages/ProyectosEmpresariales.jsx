@@ -52,7 +52,7 @@ export default function ProyectosEmpresariales() {
       <div className="text-center mt-12">
         <a
           href="/contacto"
-          className="inline-block bg-[#24d4da] hover:bg-[#1cbcc3] text-white font-semibold py-3 px-6 rounded-lg transition"
+          className="inline-block bg-[#ccff00] hover:bg-[#1cbcc3] text-black font-semibold py-3 px-6 rounded-lg transition"
         >
           ¿Tienes un proyecto? ¡Contáctanos!
         </a>
