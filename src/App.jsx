@@ -20,7 +20,14 @@ import NotFound from "./pages/NotFound";
 import Configurar from "./pages/configurar/Configurar";
 import WizardGeneral from "./pages/WizardGeneral";
 
-// Configura tu clave pública de Stripe
+// Admin
+import LoginAdmin from "./administrador/LoginAdmin";
+import DashboardAdmin from "./administrador/DashboardAdmin";
+import ProductosAdmin from "./administrador/pages/ProductosAdmin";
+import PedidosAdmin from "./administrador/pages/PedidosAdmin";
+import ReportesAdmin from "./administrador/pages/ReportesAdmin";
+import ClientesAdmin from "./administrador/pages/ClientesAdmin"; // ✅ Agregado
+
 const stripePromise = loadStripe("TU_CLAVE_PUBLICA_DE_STRIPE");
 
 const PageWrapper = ({ children }) => (
@@ -36,13 +43,9 @@ const PageWrapper = ({ children }) => (
 
 function AppContent() {
   const location = useLocation();
-  const hideLayoutRoutes = [
-    "/login",
-    "/register",
-    "/forgot-password",
-    "/reset-password",
-  ];
-  const hideLayout = hideLayoutRoutes.includes(location.pathname);
+
+  // ✅ Ocultar Navbar y Footer en Admin
+  const hideLayout = location.pathname.startsWith("/admin");
 
   return (
     <>
@@ -57,7 +60,6 @@ function AppContent() {
             <Route path="/promociones" element={<PageWrapper><Promociones /></PageWrapper>} />
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
 
-            {/* Aquí envuelves solo la ruta del carrito con Elements */}
             <Route path="/carrito" element={
               <Elements stripe={stripePromise}>
                 <PageWrapper><Carrito /></PageWrapper>
@@ -70,6 +72,18 @@ function AppContent() {
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/reset-password" element={<PageWrapper><ResetPassword /></PageWrapper>} />
+
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<LoginAdmin />} />
+
+            {/* Admin Dashboard */}
+            <Route path="/admin/dashboard" element={<DashboardAdmin />}>
+              <Route path="productos" element={<ProductosAdmin />} />
+              <Route path="pedidos" element={<PedidosAdmin />} />
+              <Route path="reportes" element={<ReportesAdmin />} />
+              <Route path="clientes" element={<ClientesAdmin />} /> {/* ✅ Nueva ruta */}
+            </Route>
+
             <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
           </Routes>
         </AnimatePresence>

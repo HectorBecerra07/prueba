@@ -2,7 +2,7 @@ const express = require("express");
 const Stripe = require("stripe");
 const cors = require("cors");
 
-const app = express();
+const app = express();x
 const stripe = new Stripe("TU_CLAVE_SECRETA_DE_STRIPE"); // 🔴 Aquí tu SECRET KEY, no la pública
 
 app.use(cors());

@@ -1,21 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../pages/ModalProductos";
 import { useCarrito } from "../context/CarritoContext";
 import toast from "react-hot-toast";
 
 const categorias = ["Filtros", "Bombas", "Tanques", "Tuberías", "Conectores", "Accesorios"];
-
-const productos = categorias.flatMap((categoria, catIndex) =>
-  Array.from({ length: 10 }, (_, i) => ({
-    id: catIndex * 10 + i + 1,
-    nombre: `${categoria.slice(0, -1)} ${i + 1}`,
-    descripcion: `Descripción del ${categoria.slice(0, -1).toLowerCase()} ${i + 1}`,
-    precioAntes: 5000,
-    precioActual: 4200,
-    imagen: `https://via.placeholder.com/300x300?text=${encodeURIComponent(categoria.slice(0, -1))}+${i + 1}`,
-    categoria,
-  }))
-);
 
 const agruparPorCategoria = (productos) => {
   return productos.reduce((acc, producto) => {
@@ -26,18 +14,25 @@ const agruparPorCategoria = (productos) => {
 };
 
 const Productos = () => {
-  const productosPorCategoria = agruparPorCategoria(productos);
+  const [productos, setProductos] = useState([]);
   const [categoriaActiva, setCategoriaActiva] = useState(categorias[0]);
   const [modalOpen, setModalOpen] = useState(false);
   const [productoActivo, setProductoActivo] = useState(null);
 
   const { agregarProducto } = useCarrito();
 
+  useEffect(() => {
+    const productosGuardados = JSON.parse(localStorage.getItem("productos")) || [];
+    setProductos(productosGuardados);
+  }, []);
+
+  const productosPorCategoria = agruparPorCategoria(productos);
+
   const handleAgregarCarrito = (producto) => {
     agregarProducto({
       ...producto,
       cantidad: 1,
-      precio: producto.precioActual, // 👈 Aquí mandas bien el precio
+      precio: producto.precio,
     });
     toast.success(`${producto.nombre} añadido al carrito 🎉`);
   };
@@ -75,7 +70,7 @@ const Productos = () => {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {productosPorCategoria[categoriaActiva].map((producto) => (
+        {productosPorCategoria[categoriaActiva]?.map((producto) => (
           <div
             key={producto.id}
             className="flex flex-col items-center gap-2"
@@ -83,7 +78,7 @@ const Productos = () => {
           >
             <div className="bg-gray-50 w-full aspect-square flex items-center justify-center rounded-xl p-4">
               <img
-                src={producto.imagen}
+                src={producto.imagen || "https://via.placeholder.com/300x300"}
                 alt={producto.nombre}
                 className="object-contain max-h-[150px]"
               />
@@ -91,7 +86,7 @@ const Productos = () => {
 
             <p className="text-center text-sm font-medium">{producto.nombre}</p>
             <p className="text-center text-black text-sm font-bold">
-              MXN ${producto.precioActual.toFixed(2)}
+              MXN ${Number(producto.precio).toFixed(2)}
             </p>
 
             <button
