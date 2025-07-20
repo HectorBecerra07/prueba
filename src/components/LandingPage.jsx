@@ -1,6 +1,7 @@
 import React from "react";
 import IniciaNegocio from "../pages/IniciaNegocio";
 import CalculadoraNegocio from "../components/CalculadoraNegocio";
+import CarruselImagenes from "../components/CarruselImagenes";
 
 export default function LandingPage() {
   const handleScroll = () => {
@@ -41,7 +42,10 @@ export default function LandingPage() {
       </section>
 
       <IniciaNegocio />
-      <CalculadoraNegocio />
+      <CarruselImagenes />
+      <div id="calculadora"> {/* 👈 Aquí el id para que el scroll funcione */}
+        <CalculadoraNegocio />
+      </div>
     </div>
   );
 }

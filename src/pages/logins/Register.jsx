@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const Register = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [password, setPassword] = useState("");
+  const { setUser } = useUser();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -16,17 +18,18 @@ const Register = () => {
       return;
     }
 
+    // Guarda en localStorage una lista de usuarios (esto es opcional si lo quieres simular)
     const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
     const nuevoUsuario = {
-      nombre,
+      name: nombre,
       email,
       telefono,
     };
-
     localStorage.setItem("usuarios", JSON.stringify([...usuarios, nuevoUsuario]));
 
-    alert("Usuario registrado correctamente");
-    navigate("/login");
+    // Guarda en tu contexto el usuario logueado
+    setUser({ name: nombre, email });
+    navigate("/perfil");
   };
 
   return (

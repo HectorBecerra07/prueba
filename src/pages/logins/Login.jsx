@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const Login = () => {
+  const { setUser } = useUser();
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("🔐 Intentando iniciar sesión...");
+    const usuarioSimulado = { name: "Juan Pérez", email: "juan@gmail.com" };
+    setUser(usuarioSimulado);
+    navigate("/perfil");
   };
 
   return (
@@ -19,7 +25,6 @@ const Login = () => {
           Iniciar sesión
         </h2>
 
-        {/* Logo animado */}
         <div className="relative text-center mb-6">
           <img
             src="/img/darmax-logo.png"
@@ -30,7 +35,6 @@ const Login = () => {
           <div className="absolute inset-x-0 top-1/2 border-t border-white/30 -z-10" />
         </div>
 
-        {/* FORMULARIO DE LOGIN */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
@@ -58,7 +62,6 @@ const Login = () => {
           </button>
         </form>
 
-        {/* ENLACES ADICIONALES */}
         <div className="text-sm text-center mt-6 text-black">
           <p>
             ¿No tienes una cuenta?{" "}

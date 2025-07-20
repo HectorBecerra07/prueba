@@ -61,6 +61,7 @@ const ProductosAdmin = () => {
             <th className="border p-2">Nombre</th>
             <th className="border p-2">Precio</th>
             <th className="border p-2">Categoría</th>
+            <th className="border p-2">Descripción</th> {/* ✅ Nueva columna */}
             <th className="border p-2">Imagen</th>
             <th className="border p-2">Acciones</th>
           </tr>
@@ -71,6 +72,7 @@ const ProductosAdmin = () => {
               <td className="border p-2">{producto.nombre}</td>
               <td className="border p-2">${producto.precio}</td>
               <td className="border p-2">{producto.categoria}</td>
+              <td className="border p-2">{producto.descripcion}</td> {/* ✅ Descripción */}
               <td className="border p-2">
                 {producto.imagen && (
                   <img
@@ -110,3 +112,4 @@ const ProductosAdmin = () => {
 };
 
 export default ProductosAdmin;
+

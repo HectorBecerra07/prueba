@@ -5,18 +5,26 @@ import {
   UserIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCarrito } from "../context/CarritoContext";
+import { useUser } from "../context/UserContext";
 import CarritoLateral from "./CarritoLateral";
 
 export default function NavBar() {
   const [navOpen, setNavOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const { carrito } = useCarrito();
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
   const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
   const location = useLocation();
   const isHome = location.pathname === "/";
   const textColor = isHome ? "text-white" : "text-black";
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <>
@@ -47,9 +55,29 @@ export default function NavBar() {
                 </span>
               )}
             </button>
-            <Link to="/login" className={`${textColor} hover:text-[#ccff00]`}>
-              <UserIcon className="w-6 h-6" />
-            </Link>
+
+            {user ? (
+              <div className="flex items-center gap-4">
+                <p className={`${textColor} font-medium`}>Hola, {user.name}</p>
+                <button
+                  onClick={() => navigate("/perfil")}
+                  className={`font-medium ${textColor} hover:text-[#ccff00]`}
+                >
+                  Mi Perfil
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className={`font-medium ${textColor} hover:text-[#ccff00]`}
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            ) : (
+              <Link to="/login" className={`${textColor} hover:text-[#ccff00]`}>
+                <UserIcon className="w-6 h-6" />
+              </Link>
+            )}
+
             <button onClick={() => setNavOpen(!navOpen)} className={`${textColor} md:hidden`}>
               {navOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
             </button>

@@ -23,9 +23,9 @@ const proyectos = [
 
 export default function ProyectosEmpresariales() {
   return (
-    <section className="bg-white py-14 px-6 md:px-10">
+    <section className="mt-16 bg-white py-14 px-6 md:px-10">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-12">
-        🏢 Proyectos Empresariales
+         Proyectos Empresariales
       </h2>
 
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">

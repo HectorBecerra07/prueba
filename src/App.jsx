@@ -10,7 +10,7 @@ import Nosotros from "./pages/Nosotros";
 import IniciaNegocio from "./pages/IniciaNegocio";
 import Promociones from "./pages/Promociones";
 import ProyectosEmpresariales from "./pages/ProyectosEmpresariales";
-import Productos from "./pages/Productos";
+import Productos from "./pages/productos";
 import Carrito from "./pages/Carrito";
 import Login from "./pages/logins/Login";
 import Register from "./pages/logins/Register";
@@ -19,6 +19,9 @@ import ResetPassword from "./pages/logins/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Configurar from "./pages/configurar/Configurar";
 import WizardGeneral from "./pages/WizardGeneral";
+import ProductPage from "./pages/ProductPage";
+import VendingInfo from "./pages/VendingInfo";
+import PerfilCliente from "./pages/PerfilCliente"; // ✅ Nuevo perfil
 
 // Admin
 import LoginAdmin from "./administrador/LoginAdmin";
@@ -26,7 +29,7 @@ import DashboardAdmin from "./administrador/DashboardAdmin";
 import ProductosAdmin from "./administrador/pages/ProductosAdmin";
 import PedidosAdmin from "./administrador/pages/PedidosAdmin";
 import ReportesAdmin from "./administrador/pages/ReportesAdmin";
-import ClientesAdmin from "./administrador/pages/ClientesAdmin"; // ✅ Agregado
+import ClientesAdmin from "./administrador/pages/ClientesAdmin";
 
 const stripePromise = loadStripe("TU_CLAVE_PUBLICA_DE_STRIPE");
 
@@ -43,8 +46,6 @@ const PageWrapper = ({ children }) => (
 
 function AppContent() {
   const location = useLocation();
-
-  // ✅ Ocultar Navbar y Footer en Admin
   const hideLayout = location.pathname.startsWith("/admin");
 
   return (
@@ -56,32 +57,33 @@ function AppContent() {
             <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
             <Route path="/nosotros" element={<PageWrapper><Nosotros /></PageWrapper>} />
             <Route path="/productos" element={<PageWrapper><Productos /></PageWrapper>} />
+            <Route path="/productos/:id" element={<PageWrapper><ProductPage /></PageWrapper>} />
             <Route path="/inicia-tu-negocio" element={<PageWrapper><IniciaNegocio /></PageWrapper>} />
+            <Route path="/vending-info" element={<PageWrapper><VendingInfo /></PageWrapper>} />
             <Route path="/promociones" element={<PageWrapper><Promociones /></PageWrapper>} />
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
-
             <Route path="/carrito" element={
               <Elements stripe={stripePromise}>
                 <PageWrapper><Carrito /></PageWrapper>
               </Elements>
             } />
-
             <Route path="/configurar/:id" element={<PageWrapper><Configurar /></PageWrapper>} />
             <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} />
+
+            {/* LOGIN / PERFIL */}
+            <Route path="/perfil" element={<PageWrapper><PerfilCliente /></PageWrapper>} /> {/* ✅ Ruta perfil agregada */}
             <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/reset-password" element={<PageWrapper><ResetPassword /></PageWrapper>} />
 
-            {/* Admin Login */}
+            {/* ADMIN */}
             <Route path="/admin/login" element={<LoginAdmin />} />
-
-            {/* Admin Dashboard */}
             <Route path="/admin/dashboard" element={<DashboardAdmin />}>
               <Route path="productos" element={<ProductosAdmin />} />
               <Route path="pedidos" element={<PedidosAdmin />} />
               <Route path="reportes" element={<ReportesAdmin />} />
-              <Route path="clientes" element={<ClientesAdmin />} /> {/* ✅ Nueva ruta */}
+              <Route path="clientes" element={<ClientesAdmin />} />
             </Route>
 
             <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />

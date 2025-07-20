@@ -35,9 +35,9 @@ const promociones = [
 
 export default function Promociones() {
   return (
-    <section className="bg-gray-50 py-12 px-4 md:px-8">
+    <section className="mt-16 bg-white py-12 px-4 md:px-8">
       <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-10">
-        🎉 Nuestras Promociones
+         Nuestras Promociones
       </h2>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">

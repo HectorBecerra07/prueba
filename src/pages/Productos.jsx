@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../pages/ModalProductos";
+import Modal from "./ProductPage";
 import { useCarrito } from "../context/CarritoContext";
 import toast from "react-hot-toast";
 
