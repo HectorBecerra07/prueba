@@ -39,6 +39,27 @@ export const CarritoProvider = ({ children }) => {
     setCarrito([]);
   };
 
+  const incrementarCantidad = (productoId) => {
+    setCarrito((prev) =>
+      prev.map((item) =>
+        item.id === productoId
+          ? { ...item, cantidad: item.cantidad + 1 }
+          : item
+      )
+    );
+  };
+
+  const disminuirCantidad = (productoId) => {
+    setCarrito((prev) =>
+      prev.map((item) => {
+        if (item.id === productoId && item.cantidad > 1) {
+          return { ...item, cantidad: item.cantidad - 1 };
+        }
+        return item;
+      })
+    );
+  };
+
   const totalProductos = carrito.reduce((acc, p) => acc + (p.cantidad || 0), 0);
 
   return (
@@ -49,6 +70,8 @@ export const CarritoProvider = ({ children }) => {
         eliminarProducto,
         vaciarCarrito,
         totalProductos,
+        incrementarCantidad,
+        disminuirCantidad,
       }}
     >
       {children}

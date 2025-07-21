@@ -4,9 +4,14 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 
 const SlideCart = ({ isOpen, onClose }) => {
-  const { carrito, eliminarProducto, vaciarCarrito } = useCarrito();
+  const {
+    carrito,
+    eliminarProducto,
+    vaciarCarrito,
+    incrementarCantidad,
+    disminuirCantidad,
+  } = useCarrito();
 
-  // Asegurar que todos los productos tengan precio y cantidad válidos
   const total = carrito.reduce((acc, p) => {
     const precio = Number(p?.precio || 0);
     const cantidad = Number(p?.cantidad || 0);
@@ -46,24 +51,45 @@ const SlideCart = ({ isOpen, onClose }) => {
               const precio = Number(p?.precio || 0);
 
               return (
-                <div key={p.id || Math.random()} className="flex items-center gap-4 border-b pb-2">
-                  <img
-                    src={imagen}
-                    alt={nombre}
-                    className="w-12 h-12 object-contain"
-                  />
-                  <div className="flex-1">
-                    <h4 className="text-sm font-medium">{nombre}</h4>
-                    <p className="text-xs text-gray-500">
-                      {cantidad} × ${precio.toFixed(2)}
-                    </p>
+                <div key={p.id} className="flex flex-col gap-2 border-b pb-2">
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={imagen}
+                      alt={nombre}
+                      className="w-12 h-12 object-contain"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-sm font-medium">{nombre}</h4>
+                      <p className="text-xs text-gray-500">
+                        {cantidad} × ${precio.toFixed(2)}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => eliminarProducto(p.id)}
+                      className="text-red-500 text-xs hover:underline"
+                    >
+                      Quitar
+                    </button>
                   </div>
-                  <button
-                    onClick={() => eliminarProducto(p.id)}
-                    className="text-red-500 text-xs hover:underline"
-                  >
-                    Quitar
-                  </button>
+
+                  <div className="flex items-center gap-2 ml-16">
+                    <button
+                      disabled={cantidad <= 1}
+                      onClick={() => disminuirCantidad(p.id)}
+                      className={`border px-2 py-1 rounded ${
+                        cantidad <= 1 ? "opacity-50 cursor-not-allowed" : ""
+                      }`}
+                    >
+                      -
+                    </button>
+                    <span>{cantidad}</span>
+                    <button
+                      onClick={() => incrementarCantidad(p.id)}
+                      className="border px-2 py-1 rounded"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               );
             })
@@ -76,7 +102,7 @@ const SlideCart = ({ isOpen, onClose }) => {
               <span>Total:</span>
               <span>${total.toFixed(2)}</span>
             </div>
-            <button className="w-full bg-[#24d4da] text-white py-2 rounded-lg hover:bg-[#1bb9bd]">
+            <button className="w-full bg-[#ccff00] text-black font-bold py-2 rounded-lg hover:brightness-90">
               Finalizar pedido
             </button>
             <button

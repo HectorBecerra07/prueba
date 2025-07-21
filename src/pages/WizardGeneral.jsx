@@ -6,6 +6,7 @@ import Step1SelectModel from "../components/Step1SelectModel";
 import Step2ModelDetails from "../components/Step2ModelDetails";
 import Step3ExtrasConfigurator from "../components/Step3ExtrasConfigurator";
 import Step4Summary from "../components/Step4Summary";
+import CarouselImages from "../components/CarouselImages"; // Carrusel agregado
 
 const imagenesCarrusel = {
   Purificadora: ["/img/purificadora1.png", "/img/purificadora2.png", "/img/purificadora3.png"],
@@ -85,17 +86,20 @@ export default function WizardGeneral() {
       )}
 
       {step === 2 && selectedModel && (
-        <div className="col-span-2">
-          <Step2ModelDetails 
-            modelo={selectedModel} 
-            vendingType={vendingType}
-            onNext={(extraTouch) => { 
-              setExtraTouchPrice(extraTouch); 
-              nextStep(); 
-            }} 
-          />
-          <div className="flex gap-4 mt-8">
-            <button onClick={prevStep} className="bg-gray-300 text-gray-800 rounded-lg px-6 py-3 hover:bg-gray-400">Regresar</button>
+        <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <CarouselImages images={imagenes} />
+          <div>
+            <Step2ModelDetails 
+              modelo={selectedModel} 
+              vendingType={vendingType}
+              onNext={(extraTouch) => { 
+                setExtraTouchPrice(extraTouch); 
+                nextStep(); 
+              }} 
+            />
+            <div className="flex gap-4 mt-8">
+              <button onClick={prevStep} className="bg-gray-300 text-gray-800 rounded-lg px-6 py-3 hover:bg-gray-400">Regresar</button>
+            </div>
           </div>
         </div>
       )}

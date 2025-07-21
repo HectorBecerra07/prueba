@@ -5,29 +5,7 @@ export default function PerfilCliente() {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
 
-  const comprasSimuladas = [
-    {
-      id: 1,
-      nombre: "Garrafones Mensuales",
-      fecha: "2025-07-20",
-      total: "$450.00 MXN",
-      estado: "Entregado",
-    },
-    {
-      id: 2,
-      nombre: "Máquina Vending",
-      fecha: "2025-06-14",
-      total: "$54,950.00 MXN",
-      estado: "Entregado",
-    },
-    {
-      id: 3,
-      nombre: "Insumos de Limpieza",
-      fecha: "2025-05-10",
-      total: "$850.00 MXN",
-      estado: "En camino",
-    },
-  ];
+  const pedidos = JSON.parse(localStorage.getItem(`pedidos-${user?.email}`)) || [];
 
   const handleLogout = () => {
     setUser(null);
@@ -52,24 +30,30 @@ export default function PerfilCliente() {
 
       <div className="bg-gray-50 rounded-xl p-6 shadow-md">
         <h3 className="text-2xl font-semibold mb-6">Tus pedidos</h3>
-        <div className="divide-y">
-          {comprasSimuladas.map((compra) => (
-            <div key={compra.id} className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-              <div>
-                <p className="font-bold">{compra.nombre}</p>
-                <p className="text-gray-500 text-sm">Fecha: {compra.fecha}</p>
+        {pedidos.length === 0 ? (
+          <p className="text-gray-500">No tienes pedidos aún.</p>
+        ) : (
+          <div className="divide-y">
+            {pedidos.map((pedido) => (
+              <div key={pedido.id} className="py-4 flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+                <div>
+                  <p className="font-bold">Pedido #{pedido.orden || "Sin número"}</p>
+                  <p className="text-gray-500 text-sm">
+                    Productos: {pedido.productos.join(", ")}
+                  </p>
+                </div>
+                <div className="text-right md:text-left">
+                  <p className="font-semibold">${pedido.total} MXN</p>
+                  <p className="text-sm">
+                    <span className={`font-bold ${pedido.estadoPedido === "Entregado" ? "text-green-600" : "text-yellow-500"}`}>
+                      {pedido.estadoPedido}
+                    </span>
+                  </p>
+                </div>
               </div>
-              <div className="text-right md:text-left">
-                <p className="font-semibold">{compra.total}</p>
-                <p className="text-sm">
-                  <span className={`font-bold ${compra.estado === "Entregado" ? "text-green-600" : "text-yellow-500"}`}>
-                    {compra.estado}
-                  </span>
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <div className="bg-white p-6 rounded-xl shadow-md">

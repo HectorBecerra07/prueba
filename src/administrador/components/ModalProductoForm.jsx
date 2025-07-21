@@ -4,6 +4,8 @@ const ModalProductoForm = ({ show, onClose, onSave, producto }) => {
   const [nombre, setNombre] = useState("");
   const [precio, setPrecio] = useState("");
   const [categoria, setCategoria] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [stock, setStock] = useState(0);
   const [imagen, setImagen] = useState("");
 
   useEffect(() => {
@@ -11,21 +13,35 @@ const ModalProductoForm = ({ show, onClose, onSave, producto }) => {
       setNombre(producto.nombre);
       setPrecio(producto.precio);
       setCategoria(producto.categoria);
+      setDescripcion(producto.descripcion);
+      setStock(producto.stock);
       setImagen(producto.imagen);
     } else {
       setNombre("");
       setPrecio("");
       setCategoria("");
+      setDescripcion("");
+      setStock(0);
       setImagen("");
     }
   }, [producto]);
 
   if (!show) return null;
 
+  const handleImagenChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImagen(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!nombre || !precio || !categoria) return;
-    onSave({ nombre, precio, categoria, imagen });
+    if (!nombre || !precio || !categoria || stock < 0) return;
+    onSave({ nombre, precio, categoria, descripcion, stock, imagen });
   };
 
   return (
@@ -65,11 +81,26 @@ const ModalProductoForm = ({ show, onClose, onSave, producto }) => {
             <option value="Conectores">Conectores</option>
             <option value="Accesorios">Accesorios</option>
           </select>
+          <textarea
+            placeholder="Descripción"
+            value={descripcion}
+            onChange={(e) => setDescripcion(e.target.value)}
+            className="w-full border rounded p-2"
+            rows="3"
+          />
           <input
-            type="text"
-            placeholder="URL de la Imagen"
-            value={imagen}
-            onChange={(e) => setImagen(e.target.value)}
+            type="number"
+            placeholder="Stock"
+            value={stock}
+            min="0"
+            onChange={(e) => setStock(parseInt(e.target.value) || 0)}
+            className="w-full border rounded p-2"
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImagenChange}
             className="w-full border rounded p-2"
           />
           <div className="flex justify-end space-x-2">

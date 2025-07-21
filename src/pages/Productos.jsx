@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "./ProductPage";
+import ProductModal from "../components/ProductModal";
 import { useCarrito } from "../context/CarritoContext";
 import toast from "react-hot-toast";
 
@@ -103,7 +103,7 @@ const Productos = () => {
         ))}
       </div>
 
-      <Modal
+      <ProductModal
         show={modalOpen}
         onClose={() => setModalOpen(false)}
         producto={productoActivo}

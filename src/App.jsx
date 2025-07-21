@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Elements } from "@stripe/react-stripe-js";
@@ -21,7 +22,9 @@ import Configurar from "./pages/configurar/Configurar";
 import WizardGeneral from "./pages/WizardGeneral";
 import ProductPage from "./pages/ProductPage";
 import VendingInfo from "./pages/VendingInfo";
-import PerfilCliente from "./pages/PerfilCliente"; // ✅ Nuevo perfil
+import PurificadoraInfo from "./pages/PurificadoraInfo";
+import VendingLimpiezaInfo from "./pages/VendingLimpiezaInfo";
+import PerfilCliente from "./pages/PerfilCliente";
 
 // Admin
 import LoginAdmin from "./administrador/LoginAdmin";
@@ -60,6 +63,8 @@ function AppContent() {
             <Route path="/productos/:id" element={<PageWrapper><ProductPage /></PageWrapper>} />
             <Route path="/inicia-tu-negocio" element={<PageWrapper><IniciaNegocio /></PageWrapper>} />
             <Route path="/vending-info" element={<PageWrapper><VendingInfo /></PageWrapper>} />
+            <Route path="/purificadora-info" element={<PageWrapper><PurificadoraInfo /></PageWrapper>} />
+            <Route path="/vending-limpieza-info" element={<PageWrapper><VendingLimpiezaInfo /></PageWrapper>} />
             <Route path="/promociones" element={<PageWrapper><Promociones /></PageWrapper>} />
             <Route path="/proyectos-empresariales" element={<PageWrapper><ProyectosEmpresariales /></PageWrapper>} />
             <Route path="/carrito" element={
@@ -71,7 +76,7 @@ function AppContent() {
             <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} />
 
             {/* LOGIN / PERFIL */}
-            <Route path="/perfil" element={<PageWrapper><PerfilCliente /></PageWrapper>} /> {/* ✅ Ruta perfil agregada */}
+            <Route path="/perfil" element={<PageWrapper><PerfilCliente /></PageWrapper>} />
             <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
             <Route path="/register" element={<PageWrapper><Register /></PageWrapper>} />
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
@@ -96,7 +101,11 @@ function AppContent() {
 }
 
 function App() {
-  return <AppContent />;
+  return (
+    <HelmetProvider>
+      <AppContent />
+    </HelmetProvider>
+  );
 }
 
 export default App;

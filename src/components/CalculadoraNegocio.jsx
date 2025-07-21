@@ -4,12 +4,12 @@ export default function CalculadoraNegocio() {
   const [tipo, setTipo] = useState("agua");
 
   return (
-    <section className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 flex flex-col items-center justify-center p-10 gap-6">
-      <h1 className="text-4xl md:text-5xl font-extrabold text-white drop-shadow text-center">
+    <section className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 flex flex-col items-center justify-center w-full p-4 md:p-10 gap-6 overflow-hidden">
+      <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow text-center">
         Calculadora de Ganancias
       </h1>
 
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6">
         <button
           onClick={() => setTipo("agua")}
           className={`px-8 py-3 rounded-full transition-all duration-300 font-bold ${
@@ -32,7 +32,9 @@ export default function CalculadoraNegocio() {
         </button>
       </div>
 
-      {tipo === "agua" ? <CalculadoraAgua /> : <CalculadoraProductos />}
+      <div className="w-full max-w-5xl">
+        {tipo === "agua" ? <CalculadoraAgua /> : <CalculadoraProductos />}
+      </div>
     </section>
   );
 }
@@ -54,19 +56,19 @@ function CalculadoraAgua() {
   const utilidadAnual = utilidadMensual * 12;
 
   return (
-    <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
-      <div className="bg-white p-10 space-y-6 text-gray-800">
-        <h2 className="text-2xl font-bold text-center">Agua - Configura tu Negocio</h2>
+    <div className="w-full flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-2xl">
+      <div className="bg-white p-6 md:p-10 space-y-4 text-gray-800 md:w-1/2">
+        <h2 className="text-xl md:text-2xl font-bold text-center">Agua - Configura tu Negocio</h2>
 
         <input
           type="range"
           min="10"
-          max="50"
+          max="100"
           value={precioGarrafon}
           onChange={(e) => setPrecioGarrafon(Number(e.target.value))}
           className="w-full accent-lime-300"
         />
-        <p className="text-center text-3xl font-extrabold text-lime-400">${precioGarrafon}</p>
+        <p className="text-center text-2xl font-extrabold text-lime-400">${precioGarrafon}</p>
 
         <div className="space-y-3">
           <Input label="Garrafones por día" value={garrafonesDia} setValue={setGarrafonesDia} />
@@ -84,13 +86,15 @@ function CalculadoraAgua() {
         </div>
       </div>
 
-      <Resultados
-        ingresosDiarios={ingresosDiarios}
-        gastosDiarios={gastosDiarios}
-        utilidadDiaria={utilidadDiaria}
-        utilidadMensual={utilidadMensual}
-        utilidadAnual={utilidadAnual}
-      />
+      <div className="md:w-1/2">
+        <Resultados
+          ingresosDiarios={ingresosDiarios}
+          gastosDiarios={gastosDiarios}
+          utilidadDiaria={utilidadDiaria}
+          utilidadMensual={utilidadMensual}
+          utilidadAnual={utilidadAnual}
+        />
+      </div>
     </div>
   );
 }
@@ -112,19 +116,19 @@ function CalculadoraProductos() {
   const utilidadAnual = utilidadMensual * 12;
 
   return (
-    <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
-      <div className="bg-white p-10 space-y-6 text-gray-800">
-        <h2 className="text-2xl font-bold text-center">Productos de Limpieza</h2>
+    <div className="w-full flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-2xl">
+      <div className="bg-white p-6 md:p-10 space-y-4 text-gray-800 md:w-1/2">
+        <h2 className="text-xl md:text-2xl font-bold text-center">Productos de Limpieza</h2>
 
         <input
           type="range"
           min="10"
-          max="50"
+          max="100"
           value={precioLitro}
           onChange={(e) => setPrecioLitro(Number(e.target.value))}
           className="w-full accent-lime-300"
         />
-        <p className="text-center text-3xl font-extrabold text-lime-400">${precioLitro}</p>
+        <p className="text-center text-2xl font-extrabold text-lime-400">${precioLitro}</p>
 
         <div className="space-y-3">
           <Input label="Litros por día" value={litrosDia} setValue={setLitrosDia} />
@@ -134,13 +138,15 @@ function CalculadoraProductos() {
         </div>
       </div>
 
-      <Resultados
-        ingresosDiarios={ingresosDiarios}
-        gastosDiarios={gastosDiarios}
-        utilidadDiaria={utilidadDiaria}
-        utilidadMensual={utilidadMensual}
-        utilidadAnual={utilidadAnual}
-      />
+      <div className="md:w-1/2">
+        <Resultados
+          ingresosDiarios={ingresosDiarios}
+          gastosDiarios={gastosDiarios}
+          utilidadDiaria={utilidadDiaria}
+          utilidadMensual={utilidadMensual}
+          utilidadAnual={utilidadAnual}
+        />
+      </div>
     </div>
   );
 }
@@ -182,16 +188,16 @@ function Resultados({
   ];
 
   return (
-    <div className="p-10 bg-[#021D39] text-white flex flex-col justify-center space-y-6">
-      <h2 className="text-3xl font-bold text-lime-300 text-center">Resultados</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div className="p-6 md:p-10 bg-[#021D39] text-white flex flex-col justify-center space-y-4 h-full">
+      <h2 className="text-2xl md:text-3xl font-bold text-lime-300 text-center">Resultados</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         {datos.map((dato) => (
           <div
             key={dato.label}
-            className="bg-gradient-to-tr from-cyan-400 to-teal-500 p-6 rounded-2xl text-center shadow-lg"
+            className="bg-gradient-to-tr from-cyan-400 to-teal-500 p-4 rounded-2xl text-center shadow-lg"
           >
-            <p className="text-lg font-semibold text-white/80">{dato.label}</p>
-            <p className="text-3xl font-extrabold text-white drop-shadow">
+            <p className="text-base font-semibold text-white/80">{dato.label}</p>
+            <p className="text-2xl font-extrabold text-white drop-shadow">
               ${dato.valor.toFixed(2)}
             </p>
           </div>
