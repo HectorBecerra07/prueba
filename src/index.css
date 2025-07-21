@@ -13,7 +13,6 @@ html, body, #root {
   overflow-x: hidden;
   background-color: white;
   scroll-behavior: smooth;
-  background-attachment: fixed;
 }
 
 * {
@@ -36,6 +35,19 @@ body {
 
 /* ----------- Gradiente para Landing ----------- */
 .bg-gradient-negocio {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bg-gradient-negocio::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-image: linear-gradient(
     to bottom,
     #24d4da,
@@ -49,11 +61,9 @@ body {
     #5bf560,
     #8df607
   );
-  background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100vh;
-  width: 100%;
+  z-index: -1;
 }
 
 /* ----------- Animaciones ----------- */
