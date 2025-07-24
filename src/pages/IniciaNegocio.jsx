@@ -6,7 +6,7 @@ const modelos = [
     id: "Purificadora",
     nombre: "PURIFICADORAS",
     imagen: "/img/purificadora-basica.png",
-    precio: 54950,
+    precio: 54957,
     descripcion: "Ideal para emprendedores. Capacidad 600 garrafones/mes.",
     rutaInfo: "/purificadora-info",
   },
