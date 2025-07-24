@@ -6,7 +6,7 @@ export default function Step0SelectVendingType({ onSelect }) {
       id: "Touch",
       nombre: "Vending Touch",
       descripcion: "Pantalla digital con sistema moderno.",
-      imagen: "/img/vending-tradicional.png",
+      imagen: "/img/vending/ReferenciasVending1.jpg",
     },
     {
       id: "Tradicional",

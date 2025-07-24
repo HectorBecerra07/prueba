@@ -6,7 +6,7 @@ export default function CalculadoraNegocio() {
   return (
     <section className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 flex flex-col items-center justify-center w-full p-4 md:p-10 gap-6 overflow-hidden">
       <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow text-center">
-        Calculadora de Ganancias
+        CALCULADORA DE GANANCIAS
       </h1>
 
       <div className="flex flex-col md:flex-row gap-4 md:gap-6">

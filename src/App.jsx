@@ -4,9 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+// COMPONENTES
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import LandingPage from "./components/LandingPage";
+
+// PÁGINAS
 import Nosotros from "./pages/Nosotros";
 import IniciaNegocio from "./pages/IniciaNegocio";
 import Promociones from "./pages/Promociones";
@@ -26,13 +30,17 @@ import PurificadoraInfo from "./pages/PurificadoraInfo";
 import VendingLimpiezaInfo from "./pages/VendingLimpiezaInfo";
 import PerfilCliente from "./pages/PerfilCliente";
 
-// Admin
+// ADMIN
 import LoginAdmin from "./administrador/LoginAdmin";
 import DashboardAdmin from "./administrador/DashboardAdmin";
 import ProductosAdmin from "./administrador/pages/ProductosAdmin";
 import PedidosAdmin from "./administrador/pages/PedidosAdmin";
 import ReportesAdmin from "./administrador/pages/ReportesAdmin";
 import ClientesAdmin from "./administrador/pages/ClientesAdmin";
+
+// VIDEOS
+import Videos from "./pages/Videos";
+import VideoDetalle from "./pages/VideoDetalle";
 
 const stripePromise = loadStripe("TU_CLAVE_PUBLICA_DE_STRIPE");
 
@@ -53,10 +61,12 @@ function AppContent() {
 
   return (
     <>
+      <ScrollToTop /> {/* Scroll fix funcional aquí */}
       {!hideLayout && <Navbar />}
       <main className="w-screen overflow-x-hidden">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="wait" initial={false}>
           <Routes location={location} key={location.pathname}>
+            {/* RUTAS PÚBLICAS */}
             <Route path="/" element={<PageWrapper><LandingPage /></PageWrapper>} />
             <Route path="/nosotros" element={<PageWrapper><Nosotros /></PageWrapper>} />
             <Route path="/productos" element={<PageWrapper><Productos /></PageWrapper>} />
@@ -82,6 +92,10 @@ function AppContent() {
             <Route path="/forgot-password" element={<PageWrapper><ForgotPassword /></PageWrapper>} />
             <Route path="/reset-password" element={<PageWrapper><ResetPassword /></PageWrapper>} />
 
+            {/* VIDEOS */}
+            <Route path="/videos" element={<PageWrapper><Videos /></PageWrapper>} />
+            <Route path="/videos/:id" element={<PageWrapper><VideoDetalle /></PageWrapper>} />
+
             {/* ADMIN */}
             <Route path="/admin/login" element={<LoginAdmin />} />
             <Route path="/admin/dashboard" element={<DashboardAdmin />}>
@@ -91,6 +105,7 @@ function AppContent() {
               <Route path="clientes" element={<ClientesAdmin />} />
             </Route>
 
+            {/* NOT FOUND */}
             <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
           </Routes>
         </AnimatePresence>

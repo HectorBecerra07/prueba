@@ -1,5 +1,6 @@
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const especificaciones = [
   {
@@ -26,9 +27,21 @@ const especificaciones = [
 
 export default function VendingInfo() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      containerRef.current?.scrollIntoView({ behavior: "auto" });
+    }, 300);
+    return () => clearTimeout(timeout);
+  }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 py-20 px-6 flex flex-col items-center">
+    <div
+      ref={containerRef}
+      className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 py-20 px-6 flex flex-col items-center"
+    >
       <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-20 text-center">
         Detalles de las Máquinas Vending
       </h2>
@@ -39,9 +52,9 @@ export default function VendingInfo() {
           return (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               className={`flex flex-col md:flex-row items-center gap-10 ${
                 !isEven ? "md:flex-row-reverse" : ""
@@ -50,17 +63,17 @@ export default function VendingInfo() {
               <motion.img
                 src={item.imagen}
                 alt={`Vending detalle ${index}`}
-                initial={{ opacity: 0, x: isEven ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="w-full md:w-1/2 rounded-3xl shadow-2xl"
+                className="w-full md:w-1/2 max-h-[300px] object-contain rounded-3xl shadow-2xl"
               />
               <div className="md:w-1/2">
                 <motion.p
-                  initial={{ opacity: 0, x: isEven ? 100 : -100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                   viewport={{ once: true }}
                   className="text-white text-xl leading-relaxed bg-white/20 p-8 rounded-3xl shadow-lg backdrop-blur-md"
                 >
@@ -72,7 +85,6 @@ export default function VendingInfo() {
         })}
       </div>
 
-      {/* BOTÓN VOLVER ATRÁS */}
       <button
         onClick={() => navigate(-1)}
         className="mt-20 px-8 py-3 rounded-xl text-lg font-semibold hover:brightness-90 transition"

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import IniciaNegocio from "../pages/IniciaNegocio";
 import CalculadoraNegocio from "../components/CalculadoraNegocio";
 import CarruselImagenes from "../components/CarruselImagenes";
+import PurificadoresCaseros from "../components/PurificadoresCaseros";
 
 export default function LandingPage() {
+  // ✅ Esto garantiza que cada vez que se renderiza, empieza desde arriba
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   const handleScroll = () => {
     const target = document.getElementById("calculadora");
     if (target) {
@@ -63,6 +69,7 @@ export default function LandingPage() {
 
         <IniciaNegocio />
         <CarruselImagenes />
+        <PurificadoresCaseros />
         <div id="calculadora">
           <CalculadoraNegocio />
         </div>

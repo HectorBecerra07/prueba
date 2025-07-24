@@ -11,7 +11,7 @@ import CarouselImages from "../components/CarouselImages"; // Carrusel agregado
 const imagenesCarrusel = {
   Purificadora: ["/img/purificadora1.png", "/img/purificadora2.png", "/img/purificadora3.png"],
   Vending: ["/img/imgvending/vending1.jpeg", "/img/imgvending/vending2.webp", "/img/imgvending/vending3.jpg"],
-  "Vending-Limpieza": ["/img/limpieza1.png", "/img/limpieza2.png", "/img/limpieza3.png"],
+  "Vending-Limpieza": ["/img/vending/vendinglimpieza.jpg", "/img/vending/vendinglimpieza8.jpg", "/img/limpieza3.png"],
 };
 
 const configuraciones = {

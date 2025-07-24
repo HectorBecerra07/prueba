@@ -69,23 +69,24 @@ const Productos = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {productosPorCategoria[categoriaActiva]?.map((producto) => (
           <div
             key={producto.id}
-            className="flex flex-col items-center gap-2"
+            className="flex flex-col items-center gap-3 cursor-pointer group"
             onClick={() => handleVerMas(producto)}
           >
-            <div className="bg-gray-50 w-full aspect-square flex items-center justify-center rounded-xl p-4">
+            <div className="bg-white shadow-md rounded-2xl p-6 w-full aspect-[4/3] flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               <img
-                src={producto.imagen || "https://via.placeholder.com/300x300"}
+                src={producto.imagen || "https://via.placeholder.com/400x300"}
                 alt={producto.nombre}
-                className="object-contain max-h-[150px]"
+                className="object-contain max-h-[200px] transition-transform duration-300 group-hover:scale-110"
               />
             </div>
 
-            <p className="text-center text-sm font-medium">{producto.nombre}</p>
-            <p className="text-center text-black text-sm font-bold">
+            <p className="text-center text-base font-medium capitalize">{producto.nombre}</p>
+
+            <p className="text-center text-black font-semibold text-base">
               MXN ${Number(producto.precio).toFixed(2)}
             </p>
 
@@ -94,7 +95,7 @@ const Productos = () => {
                 e.stopPropagation();
                 handleAgregarCarrito(producto);
               }}
-              className="text-black px-4 py-1 rounded-full text-xs font-semibold hover:brightness-90"
+              className="text-black px-5 py-2 rounded-full text-sm font-semibold hover:brightness-90 transition"
               style={{ backgroundColor: "#ccff00" }}
             >
               Añadir al carrito

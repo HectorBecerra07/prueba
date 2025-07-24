@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const modelos = [
   {
     id: "Purificadora",
-    nombre: "Purificadora Inicial",
+    nombre: "PURIFICADORAS",
     imagen: "/img/purificadora-basica.png",
     precio: 54950,
     descripcion: "Ideal para emprendedores. Capacidad 600 garrafones/mes.",
@@ -12,7 +12,7 @@ const modelos = [
   },
   {
     id: "Vending",
-    nombre: "Máquinas Vending",
+    nombre: "MAQUINAS VENDING",
     imagen: "/img/purificadora-intermedia.png",
     precio: 54950,
     descripcion: "Para negocio en crecimiento. 1200 garrafones/mes.",
@@ -20,8 +20,8 @@ const modelos = [
   },
   {
     id: "Vending-Limpieza",
-    nombre: "Vending de Limpieza",
-    imagen: "/img/purificadora-premium.png",
+    nombre: "VENDING DE LIMPIEZA",
+    imagen: "/img/vending/vendinglimpieza.jpg",
     precio: 23000,
     descripcion: "Automatizada para venta de productos de limpieza.",
     rutaInfo: "/vending-limpieza-info",
@@ -53,7 +53,7 @@ const IniciaNegocio = () => {
 
       <div className="min-h-screen bg-white py-20 px-6 flex flex-col items-center">
         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-14 drop-shadow text-center">
-          Inicia tu negocio con tu purificadora
+          INICIA TU NEGOCIO CON DARMAX
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 w-full max-w-7xl">
@@ -62,11 +62,11 @@ const IniciaNegocio = () => {
               key={modelo.id}
               className="bg-white rounded-3xl shadow-xl overflow-hidden transition hover:shadow-2xl border border-gray-100"
             >
-              <div className="w-full h-56 bg-gray-50 flex items-center justify-center p-6">
+              <div className="w-full h-72 md:h-80 bg-gray-50 flex items-center justify-center p-4">
                 <img
                   src={modelo.imagen}
                   alt={modelo.nombre}
-                  className="h-full object-contain"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
 

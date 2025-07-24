@@ -46,11 +46,12 @@ export default function Nosotros() {
               viewport={{ once: false, amount: 0.5 }}
               transition={{ duration: 0.8 }}
             >
-              <img
-                src="/img/nosotros/historia1.jpg"
-                alt="Historia Darmax"
-                className="rounded-xl shadow-lg"
-              />
+              
+      <img
+        src="/img/Historia2.jpg"
+        alt="Historia Darmax Parte 2"
+        className="rounded-xl shadow-lg"
+      />
             </motion.div>
 
             <motion.div
