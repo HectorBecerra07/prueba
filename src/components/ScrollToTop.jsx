@@ -6,11 +6,10 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    // Espera al próximo frame para evitar saltos por animaciones
+    requestAnimationFrame(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    }, 100); // Ajustable si querés
-
-    return () => clearTimeout(timeout);
+    });
   }, [pathname]);
 
   return null;

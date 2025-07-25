@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCarrito } from "../context/CarritoContext";
 
@@ -29,6 +29,11 @@ const purificadores = [
 export default function PurificadoresCaseros() {
   const navigate = useNavigate();
   const { agregarAlCarrito } = useCarrito();
+
+  // 👇 Esto fuerza el scroll al top cuando entra a la vista
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, []);
 
   const handleAgregar = (producto) => {
     const productoConCantidad = { ...producto, cantidad: 1 };

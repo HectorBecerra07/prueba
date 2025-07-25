@@ -1,11 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const promociones = [
   {
     id: 1,
     titulo: "¡Llévate 2x1 en purificadoras!",
-    descripcion: "Solo este mes, compra una purificadora y te damos otra igual ¡gratis!",
+    descripcion: "Compra una purificadora y llévate otra gratis.",
     imagen: "/img/promos/promo1.jpg",
   },
   {
@@ -20,71 +24,117 @@ const promociones = [
     descripcion: "Incluye asesoría, puesta en marcha y garantía extendida.",
     imagen: "/img/promos/promo3.jpg",
   },
+];
+
+const topSellers = [
   {
-    id: 4,
-    titulo: "Crédito sin intereses 6 meses",
-    descripcion: "Solicítalo ahora y paga en cómodas mensualidades sin intereses.",
-    imagen: "/img/promos/promo4.jpg",
+    titulo: "Purificadora Pro Max",
+    imagen: "/img/top/pro-max.jpg",
   },
   {
-    id: 5,
-    titulo: "Bonificación por referidos",
-    descripcion: "Comparte tu experiencia DarMax y gana recompensas.",
-    imagen: "/img/promos/promo5.jpg",
+    titulo: "Vending Touch 8",
+    imagen: "/img/top/vending-touch.jpg",
+  },
+  {
+    titulo: "Vending Limpieza 8",
+    imagen: "/img/top/vending-limpieza.jpg",
   },
 ];
+
+const combos2en1 = [
+  {
+    titulo: "Purificadora + Vending Touch",
+    imagen: "/img/combos/2en1-touch.jpg",
+  },
+  {
+    titulo: "Purificadora + Vending Tradicional",
+    imagen: "/img/combos/2en1-tradicional.jpg",
+  },
+  {
+    titulo: "Purificadora + Vending Limpieza",
+    imagen: "/img/combos/2en1-limpieza.jpg",
+  },
+];
+
+const combo3en1 = {
+  titulo: "Combo 3 en 1: Puri + Vending Touch + Limpieza",
+  descripcion: "La solución completa para tu emprendimiento",
+  imagen: "/img/combos/3en1.jpg",
+};
 
 export default function Promociones() {
   return (
     <>
       <Helmet>
-        <title>Promociones | Purificadoras, Vending y Limpieza | Darmax</title>
-        <meta
-          name="description"
-          content="Descubre nuestras promociones exclusivas: 2x1 en purificadoras, descuentos especiales y más para impulsar tu negocio con Darmax."
-        />
+        <title>Promociones | Darmax</title>
+        <meta name="description" content="Descubre nuestras promociones exclusivas para emprender con Darmax." />
         <link rel="canonical" href="https://tudominio.com/promociones" />
-        <meta property="og:title" content="Promociones | Purificadoras, Vending y Limpieza | Darmax" />
-        <meta
-          property="og:description"
-          content="Ofertas para emprender con purificadoras, vending de agua y productos de limpieza. Darmax te apoya a crecer."
-        />
-        <meta property="og:image" content="https://tudominio.com/img/og-image.png" />
-        <meta property="og:url" content="https://tudominio.com/promociones" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <section className="mt-16 bg-white py-12 px-4 md:px-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-800 mb-10">
-          Nuestras Promociones
-        </h2>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+      {/* Carrusel de Promociones */}
+      <section className="mt-24"> {/* Cambia a pt-32 si tu navbar es fixed */}
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          autoplay={{ delay: 4000 }}
+          loop
+          pagination={{ clickable: true }}
+          className="h-72 md:h-96"
+        >
           {promociones.map((promo) => (
-            <div
-              key={promo.id}
-              className="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition transform hover:-translate-y-1 duration-300"
-            >
-              <img
-                src={promo.imagen}
-                alt={promo.titulo}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  {promo.titulo}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">{promo.descripcion}</p>
-                <button
-                  className="px-4 py-2 rounded-lg font-semibold text-sm text-black hover:brightness-90 transition"
-                  style={{ backgroundColor: "#ccff00" }}
-                >
-                  Aprovechar ahora
-                </button>
+            <SwiperSlide key={promo.id}>
+              <div className="relative w-full h-full">
+                <img
+                  src={promo.imagen}
+                  alt={promo.titulo}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-center px-4">
+                  <div className="text-white">
+                    <h2 className="text-2xl md:text-4xl font-bold mb-2">{promo.titulo}</h2>
+                    <p className="text-sm md:text-lg">{promo.descripcion}</p>
+                  </div>
+                </div>
               </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+
+      {/* Sección Top Sellers */}
+      <section className="py-12 px-4 md:px-8 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center text-slate-800 mb-10">Top Sellers</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          {topSellers.map((item, index) => (
+            <div key={index} className="bg-white rounded-2xl shadow-md overflow-hidden">
+              <img src={item.imagen} alt={item.titulo} className="w-full h-48 object-cover" />
+              <div className="p-4 text-center font-semibold text-slate-700">{item.titulo}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Sección 2 en 1 */}
+      <section className="py-12 px-4 md:px-8">
+        <h2 className="text-3xl font-bold text-center text-slate-800 mb-10">Combos 2 en 1</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+          {combos2en1.map((combo, index) => (
+            <div key={index} className="bg-white rounded-2xl shadow-md overflow-hidden">
+              <img src={combo.imagen} alt={combo.titulo} className="w-full h-48 object-cover" />
+              <div className="p-4 text-center font-semibold text-slate-700">{combo.titulo}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Sección 3 en 1 */}
+      <section className="py-12 px-4 md:px-8 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center text-slate-800 mb-10">Combo 3 en 1</h2>
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+          <img src={combo3en1.imagen} alt={combo3en1.titulo} className="w-full h-64 object-cover" />
+          <div className="p-6 text-center">
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">{combo3en1.titulo}</h3>
+            <p className="text-gray-600 text-sm">{combo3en1.descripcion}</p>
+          </div>
         </div>
       </section>
     </>

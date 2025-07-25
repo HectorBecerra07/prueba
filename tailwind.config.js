@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -10,13 +11,14 @@ export default {
         secondary: "#1b9b9f",
         accent: "#ccff00",
         textDark: "#333333",
+        bgLight: "#f9f9f9",
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-negocio':
-          "linear-gradient(to bottom, #24d4da, #24d4da, #24d4da, #24d4da, #24d4da, #0ad9d6, #00ded0, #00e2c9, #00eab1, #19f18e, #5bf560, #8df607)"
+        'gradient-negocio': 
+          "linear-gradient(to bottom, #24d4da, #0ad9d6, #00ded0, #00e2c9, #00eab1, #19f18e, #5bf560, #8df607)"
       },
       keyframes: {
         waveRise: {
@@ -27,10 +29,15 @@ export default {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-10px)" },
         },
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         waveRise: "waveRise 0.8s ease-out forwards",
         waveWiggle: "waveWiggle 2s ease-in-out infinite",
+        fadeInUp: "fadeInUp 0.6s ease-out both",
       },
     },
   },

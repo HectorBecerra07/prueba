@@ -1,47 +1,62 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
+
+const videos = [
+  {
+    id: "purificador-eco",
+    titulo: "Purificador Compacto Eco",
+    thumbnail: "/imgs/purificador1.jpg",
+    descripcion: "Detalles técnicos, instalación y mantenimiento del modelo Eco.",
+  },
+  {
+    id: "purificador-plus",
+    titulo: "Purificador Familiar Plus",
+    thumbnail: "/imgs/purificador2.jpg",
+    descripcion: "Demostración del modelo Plus y consejos de uso doméstico.",
+  },
+  {
+    id: "purificador-premium",
+    titulo: "Purificador Premium UV",
+    thumbnail: "/imgs/purificador3.jpg",
+    descripcion: "Funcionamiento interno con luz UV y mantenimiento recomendado.",
+  },
+];
 
 export default function Videos() {
-  const videos = [
-    {
-      id: "purificador-eco",
-      titulo: "Purificador Eco",
-      video: "https://www.youtube.com/watch?v=7fsYVBVWxRI"
-    },
-    {
-      id: "purificador-plus",
-      titulo: "Purificador Familiar Plus",
-      video: "https://www.youtube.com/embed/VIDEO_ID_2"
-    },
-    {
-      id: "purificador-premium",
-      titulo: "Purificador Premium UV",
-      video: "https://www.youtube.com/embed/VIDEO_ID_3"
-    }
-  ];
+  const navigate = useNavigate();
 
   return (
-    <div className="px-6 md:px-16 py-12">
-      <h1 className="text-4xl font-bold mb-6">Centro de Videos</h1>
-      <div className="grid md:grid-cols-2 gap-10">
-        {videos.map((v) => (
-          <div key={v.id} className="flex flex-col">
-            <h3 className="text-2xl font-semibold mb-2">{v.titulo}</h3>
-            <iframe
-              className="w-full aspect-video rounded mb-2"
-              src={v.video}
-              title={v.titulo}
-              allowFullScreen
-            ></iframe>
-            <Link
-              to={`/videos/${v.id}`}
-              className="text-blue-600 text-sm hover:underline"
+    <>
+      <Helmet>
+        <title>Centro de Videos | Darmax</title>
+        <meta
+          name="description"
+          content="Explora nuestra galería de videos sobre purificadoras y equipos Darmax."
+        />
+      </Helmet>
+
+      <div className="w-screen min-h-screen font-sans text-gray-800 bg-white overflow-x-hidden pt-20 px-6 md:px-16 py-16">
+        <h1 className="text-4xl font-bold mb-12 text-blue-900 text-center">Centro de Videos</h1>
+
+        <div className="grid md:grid-cols-3 gap-10 max-w-7xl mx-auto">
+          {videos.map((video) => (
+            <div
+              key={video.id}
+              className="bg-white border border-gray-200 rounded-3xl shadow-lg p-6 hover:scale-[1.02] transition cursor-pointer"
+              onClick={() => navigate(`/videos/${video.id}`)}
             >
-              Ver más detalles
-            </Link>
-          </div>
-        ))}
+              <img
+                src={video.thumbnail}
+                alt={video.titulo}
+                className="w-full h-48 object-cover rounded-2xl mb-4"
+              />
+              <h3 className="text-xl font-semibold text-blue-800 mb-2">{video.titulo}</h3>
+              <p className="text-sm text-gray-700">{video.descripcion}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
+// Simulación de productos (puedes importar desde un contexto o fetch real si gustas)
 const productos = [
   {
     id: "1",
@@ -28,10 +29,26 @@ const productos = [
 export default function ProductPage({ onAddToCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const producto = productos.find((p) => p.id === id);
 
+  // ✅ Scroll to top al montar
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
   if (!producto) {
-    return <div className="text-center py-20">Producto no encontrado</div>;
+    return (
+      <div className="text-center py-20">
+        <h2 className="text-2xl font-bold text-red-500 mb-4">Producto no encontrado</h2>
+        <button
+          onClick={() => navigate("/productos")}
+          className="text-blue-600 hover:underline"
+        >
+          Volver a productos
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -48,11 +65,15 @@ export default function ProductPage({ onAddToCart }) {
         <div className="p-8 flex flex-col justify-center gap-6">
           <h1 className="text-3xl font-bold text-gray-900">{producto.nombre}</h1>
           <p className="text-gray-700">{producto.descripcion}</p>
-          <p className="text-2xl font-semibold text-gray-900">${producto.precio.toFixed(2)}</p>
+          <p className="text-2xl font-semibold text-gray-900">
+            ${producto.precio.toFixed(2)}
+          </p>
 
           <button
             onClick={() => {
-              onAddToCart(producto);
+              if (onAddToCart) {
+                onAddToCart({ ...producto, cantidad: 1 });
+              }
               navigate("/carrito");
             }}
             className="bg-[#ccff00] hover:brightness-90 text-black px-6 py-3 rounded-xl font-semibold"
@@ -71,4 +92,3 @@ export default function ProductPage({ onAddToCart }) {
     </div>
   );
 }
-
