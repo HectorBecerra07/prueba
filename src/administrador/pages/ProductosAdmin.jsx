@@ -5,6 +5,7 @@ const ProductosAdmin = () => {
   const [productos, setProductos] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [productoEditando, setProductoEditando] = useState(null);
+  const [filtro, setFiltro] = useState("todos");
 
   useEffect(() => {
     const productosGuardados = JSON.parse(localStorage.getItem("productos")) || [];
@@ -41,19 +42,36 @@ const ProductosAdmin = () => {
     setModalOpen(true);
   };
 
+  const productosFiltrados = filtro === "todos"
+    ? productos
+    : productos.filter((p) => p.categoria?.toLowerCase() === filtro.toLowerCase());
+
   return (
     <div className="p-10">
       <h2 className="text-2xl font-bold mb-6">Gestión de Productos</h2>
 
-      <button
-        className="mb-4 px-4 py-2 rounded bg-cyan-500 text-white hover:bg-cyan-600"
-        onClick={() => {
-          setProductoEditando(null);
-          setModalOpen(true);
-        }}
-      >
-        + Agregar Producto
-      </button>
+      <div className="flex items-center justify-between mb-4">
+        <button
+          className="px-4 py-2 rounded bg-cyan-500 text-white hover:bg-cyan-600"
+          onClick={() => {
+            setProductoEditando(null);
+            setModalOpen(true);
+          }}
+        >
+          + Agregar Producto
+        </button>
+
+        <select
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+          className="border px-3 py-1 rounded"
+        >
+          <option value="todos">Todos</option>
+          <option value="purificador">Purificadores</option>
+          <option value="vending">Máquinas Vending</option>
+          <option value="limpieza">Limpieza</option>
+        </select>
+      </div>
 
       <table className="w-full border text-sm">
         <thead className="bg-gray-100">
@@ -68,7 +86,7 @@ const ProductosAdmin = () => {
           </tr>
         </thead>
         <tbody>
-          {productos.map((producto) => (
+          {productosFiltrados.map((producto) => (
             <tr key={producto.id} className="text-center">
               <td className="border p-2">{producto.nombre}</td>
               <td className="border p-2">${producto.precio}</td>
@@ -114,4 +132,3 @@ const ProductosAdmin = () => {
 };
 
 export default ProductosAdmin;
-

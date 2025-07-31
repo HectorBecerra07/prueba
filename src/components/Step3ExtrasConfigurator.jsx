@@ -81,7 +81,7 @@ const extrasPorMaquina = {
   ],
 };
 
-export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onNext }) {
+export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onNext, onBack }) {
   const extras = extrasPorMaquina[selectedModelId] || [];
   const [seleccionados, setSeleccionados] = useState([]);
 
@@ -118,6 +118,7 @@ export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onN
   return (
     <div className="space-y-8">
       <h2 className="text-3xl font-bold text-gray-800">Extras Opcionales</h2>
+
       <ul className="space-y-4 max-w-3xl mx-auto">
         {extras.map((extra) => (
           <li
@@ -135,7 +136,9 @@ export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onN
               <div>
                 <p className="font-medium text-gray-800">{extra.nombre}</p>
                 <p className="text-gray-500 text-sm">{extra.descripcion}</p>
-                <p className="text-sm font-bold text-gray-700">${extra.precio.toLocaleString()} MXN</p>
+                <p className="text-sm font-bold text-gray-700">
+                  ${extra.precio.toLocaleString()} MXN
+                </p>
               </div>
               <input
                 type="checkbox"
@@ -148,16 +151,27 @@ export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onN
           </li>
         ))}
       </ul>
-      <button
-        onClick={() => {
-          const extrasSeleccionados = extras.filter((e) => seleccionados.includes(e.id));
-          onSelect(extrasSeleccionados);
-          onNext();
-        }}
-        className="bg-black text-white rounded-lg px-6 py-3 hover:opacity-90"
-      >
-        Continuar
-      </button>
+
+      {/* Botones en fila */}
+      <div className="flex flex-col md:flex-row justify-between gap-4 max-w-3xl mx-auto mt-8">
+        <button
+          onClick={onBack}
+          className="bg-gray-300 text-gray-800 rounded-lg px-6 py-3 hover:bg-gray-400"
+        >
+          ← Regresar
+        </button>
+
+        <button
+          onClick={() => {
+            const extrasSeleccionados = extras.filter((e) => seleccionados.includes(e.id));
+            onSelect(extrasSeleccionados);
+            onNext();
+          }}
+          className="bg-black text-white rounded-lg px-6 py-3 hover:opacity-90"
+        >
+          Continuar →
+        </button>
+      </div>
     </div>
   );
 }

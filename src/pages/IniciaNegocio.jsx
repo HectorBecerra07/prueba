@@ -28,30 +28,19 @@ const modelos = [
   },
 ];
 
-const IniciaNegocio = () => {
+const IniciaNegocio = ({ inicioRef }) => {
   const navigate = useNavigate();
 
   return (
     <>
       <Helmet>
         <title>Inicia tu Negocio con Purificadoras y Máquinas Vending | Darmax</title>
-        <meta
-          name="description"
-          content="Elige entre purificadoras de agua, máquinas vending y soluciones de limpieza para comenzar tu negocio con Darmax."
-        />
-        <link rel="canonical" href="https://tudominio.com/inicia-tu-negocio" />
-        <meta property="og:title" content="Inicia tu Negocio con Purificadoras y Máquinas Vending | Darmax" />
-        <meta
-          property="og:description"
-          content="Soluciones para emprendedores: purificadoras, vending de agua y máquinas para limpieza. Comienza tu negocio hoy con Darmax."
-        />
-        <meta property="og:image" content="https://tudominio.com/img/og-image.png" />
-        <meta property="og:url" content="https://tudominio.com/inicia-tu-negocio" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
-      <div className="min-h-screen bg-white py-20 px-6 flex flex-col items-center">
+      <div
+        ref={inicioRef}
+        className="min-h-screen bg-white py-20 px-6 flex flex-col items-center"
+      >
         <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-14 drop-shadow text-center">
           INICIA TU NEGOCIO CON DARMAX
         </h2>
@@ -62,12 +51,10 @@ const IniciaNegocio = () => {
               key={modelo.id}
               className="bg-white rounded-3xl shadow-xl overflow-hidden transition hover:shadow-2xl border border-gray-100"
             >
-              <div className="w-full h-72 md:h-80 bg-gray-50 flex items-center justify-center p-4">
-                <img
-                  src={modelo.imagen}
-                  alt={modelo.nombre}
-                  className="max-h-full max-w-full object-contain"
-                />
+              <div className="w-full h-72 md:h-80 bg-gray-100 flex items-center justify-center p-4">
+                <span className="text-gray-400 text-sm text-center">
+                  Imagen no disponible
+                </span>
               </div>
 
               <div className="p-6">

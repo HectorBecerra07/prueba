@@ -19,7 +19,6 @@ export default function NavBar() {
   const totalItems = carrito.reduce((acc, p) => acc + p.cantidad, 0);
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const textColor = isHome ? "text-white" : "text-black";
 
   const handleLogout = () => {
     setUser(null);
@@ -28,7 +27,13 @@ export default function NavBar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 px-4 py-3 bg-transparent">
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 px-4 py-3 transition-all duration-300 ${
+          isHome
+            ? "bg-transparent text-white"
+            : "bg-white/90 backdrop-blur text-black shadow-md"
+        }`}
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img
@@ -39,15 +44,15 @@ export default function NavBar() {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/inicia-tu-negocio" className={`${textColor} font-medium hover:text-[#ccff00]`}>INICIA TU NEGOCIO</Link>
-            <Link to="/productos" className={`${textColor} font-medium hover:text-[#ccff00]`}>PRODUCTOS</Link>
-            <Link to="/promociones" className={`${textColor} font-medium hover:text-[#ccff00]`}>PROMOCIONES</Link>
-            <Link to="/proyectos-empresariales" className={`${textColor} font-medium hover:text-[#ccff00]`}>PROYECTOS</Link>
-            <Link to="/nosotros" className={`${textColor} font-medium hover:text-[#ccff00]`}>NOSOTROS</Link>
+            <Link to="/inicia-tu-negocio" className="font-medium hover:text-[#ccff00]">INICIA TU NEGOCIO</Link>
+            <Link to="/productos" className="font-medium hover:text-[#ccff00]">PRODUCTOS</Link>
+            <Link to="/promociones" className="font-medium hover:text-[#ccff00]">PROMOCIONES</Link>
+            <Link to="/proyectos-empresariales" className="font-medium hover:text-[#ccff00]">PROYECTOS</Link>
+            <Link to="/nosotros" className="font-medium hover:text-[#ccff00]">NOSOTROS</Link>
           </div>
 
           <div className="flex items-center space-x-4">
-            <button onClick={() => setShowCart(true)} className={`relative ${textColor} hover:text-[#ccff00]`}>
+            <button onClick={() => setShowCart(true)} className="relative hover:text-[#ccff00]">
               <ShoppingBagIcon className="w-6 h-6" />
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-600 text-black text-xs font-bold px-1.5 py-0.5 rounded-full">
@@ -58,33 +63,34 @@ export default function NavBar() {
 
             {user ? (
               <div className="flex items-center gap-4">
-                <p className={`${textColor} font-medium`}>Hola, {user.name}</p>
+                <p className="font-medium">Hola, {user.name}</p>
                 <button
                   onClick={() => navigate("/perfil")}
-                  className={`font-medium ${textColor} hover:text-[#ccff00]`}
+                  className="font-medium hover:text-[#ccff00]"
                 >
                   Mi Perfil
                 </button>
                 <button
                   onClick={handleLogout}
-                  className={`font-medium ${textColor} hover:text-[#ccff00]`}
+                  className="font-medium hover:text-[#ccff00]"
                 >
                   Cerrar Sesión
                 </button>
               </div>
             ) : (
-              <Link to="/login" className={`${textColor} hover:text-[#ccff00]`}>
+              <Link to="/login" className="hover:text-[#ccff00]">
                 <UserIcon className="w-6 h-6" />
               </Link>
             )}
 
-            <button onClick={() => setNavOpen(!navOpen)} className={`${textColor} md:hidden`}>
+            <button onClick={() => setNavOpen(!navOpen)} className="md:hidden">
               {navOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
             </button>
           </div>
         </div>
 
-        <div className={`absolute top-0 right-0 w-full md:hidden transform transition-all duration-300 ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"} bg-white rounded-b-3xl shadow-xl`}>
+        {/* Menú mobile */}
+        <div className={`absolute top-0 right-0 w-full md:hidden transform transition-all duration-300 ${navOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"} bg-white rounded-b-3xl shadow-xl z-40`}>
           <div className="flex justify-end p-4">
             <button onClick={() => setNavOpen(false)}>
               <XMarkIcon className="w-6 h-6 text-black" />

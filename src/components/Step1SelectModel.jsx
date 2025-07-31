@@ -1,6 +1,12 @@
 import React from "react";
 
-export default function Step1SelectModel({ modelos, onSelect, onNext }) {
+export default function Step1SelectModel({ modelos, vendingType, onSelect, onNext }) {
+  // Filtrar según el tipo seleccionado
+  const modelosFiltrados = modelos.filter((item) => {
+    const esTouch = item.id.toLowerCase().includes("touch");
+    return vendingType === "Touch" ? esTouch : !esTouch;
+  });
+
   const handleClick = (modelo) => {
     onSelect(modelo);
     onNext();
@@ -8,9 +14,12 @@ export default function Step1SelectModel({ modelos, onSelect, onNext }) {
 
   return (
     <div className="space-y-8">
-      <h2 className="text-4xl font-bold text-gray-900">Elige tu modelo</h2>
-      <div className="space-y-4">
-        {modelos.map((item) => (
+      <h2 className="text-4xl font-bold text-gray-900 text-center">
+        Elige tu modelo {vendingType === "Touch" ? "Touch" : "Tradicional"}
+      </h2>
+
+      <div className="space-y-4 max-w-3xl mx-auto">
+        {modelosFiltrados.map((item) => (
           <div
             key={item.id}
             className="border rounded-xl p-6 hover:border-[#24d4da] hover:shadow-lg transition cursor-pointer"

@@ -74,6 +74,7 @@ const ModalProductoForm = ({ show, onClose, onSave, producto }) => {
             required
           >
             <option value="">Selecciona una categoría</option>
+            <option value="PurificadoresCaseros">Purificadores Caseros</option>
             <option value="Filtros">Filtros</option>
             <option value="Bombas">Bombas</option>
             <option value="Tanques">Tanques</option>

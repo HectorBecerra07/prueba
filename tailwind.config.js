@@ -14,7 +14,7 @@ export default {
         bgLight: "#f9f9f9",
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        bangers: ['Bangers', 'cursive'],
       },
       backgroundImage: {
         'gradient-negocio': 

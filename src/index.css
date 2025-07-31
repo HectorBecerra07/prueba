@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap'); 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 /* ----------- Reset General ----------- */
 html,
@@ -24,51 +26,47 @@ body,
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Bangers', cursive;
+  font-style: italic;
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ----------- Scroll Oculto ----------- */
-.scrollbar-hide {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-
-/* ----------- Gradiente para Landing ----------- */
-.bg-gradient-negocio {
+/* ----------- Fondo con imagen para landing ----------- */
+.bg-negocio-img {
   position: relative;
   min-height: 100vh;
   width: 100%;
   overflow: hidden;
-}
-
-.bg-gradient-negocio::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    #24d4da,
-    #24d4da,
-    #0ad9d6,
-    #00ded0,
-    #00e2c9,
-    #00eab1,
-    #19f18e,
-    #5bf560,
-    #8df607
-  );
-  background-repeat: no-repeat;
+  background-image: url("/img/fondos.jpg"); /* Asegurate que esté aquí */
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* ----------- Animaciones ----------- */
+.bg-negocio-img::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Overlay oscuro */
+  z-index: 0;
+}
+
+.bg-negocio-img > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ----------- Resto de estilos ----------- */
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 @keyframes fadeInDown {
   from {
     opacity: 0;
@@ -79,27 +77,22 @@ body {
     transform: translateY(0);
   }
 }
-
 .animate-fade-in-down {
   animation: fadeInDown 0.6s ease-out forwards;
 }
 
-/* ----------- Navbar Transición ----------- */
 nav {
   transition: background-color 0.4s ease, box-shadow 0.4s ease;
 }
-
 nav a {
   transition: color 0.3s ease;
 }
 
-/* ----------- Sidebar HUD Futurista ----------- */
 .sidebar-hud {
   position: relative;
   z-index: 0;
   overflow: hidden;
 }
-
 .sidebar-hud::before {
   content: "";
   position: absolute;
@@ -136,22 +129,18 @@ nav a {
   position: relative;
   z-index: 1;
 }
-
 .sidebar-dark {
   background-color: #050a1a;
   color: #00ffff;
 }
-
 .sidebar-light {
   background-color: #fff;
   color: #000;
 }
-
 .sidebar-light .sidebar-hud::before {
   display: none;
 }
 
-/* ----------- Sidebar Responsive ----------- */
 @media (max-width: 768px) {
   .sidebar-hud {
     width: 100%;
