@@ -85,7 +85,6 @@ export default function LandingPage() {
       </div>
 
       <CarruselImagenes />
-      <PurificadoresCaseros />
 
       <div ref={calculadoraRef} className="scroll-mt-1">
         <CalculadoraNegocio />

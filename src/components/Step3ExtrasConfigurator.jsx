@@ -1,36 +1,40 @@
 import React, { useState } from "react";
 
 const extrasPorMaquina = {
-  Purificadora1: [
+  Neptuno: [
     { id: "tinaco-2500", nombre: "4 Tinacos 2500L", descripcion: "Para almacenamiento", precio: 10500 },
     { id: "tinaco-5000", nombre: "2 Tinacos 5000L", descripcion: "Para almacenamiento", precio: 20000 },
     { id: "Tramites", nombre: "Permisos, Trámites y Requerimientos", descripcion: "Requisitos legales y tramites", precio: 15000 },
     { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
     { id: "Volantes-tarjetas", nombre: "Volantes publicitarios y Tarjetas publicitarias", descripcion: "Diseño y creación de volantes publicitarios y Tarjetas", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
-  Purificadora2: [
+  NeptunoAPlus: [
     { id: "tinaco-2500", nombre: "Tinacos 2500L", descripcion: "Para almacenamiento", precio: 5000 },
     { id: "tinaco-5000", nombre: "Tinacos 5000L", descripcion: "Para almacenamiento", precio: 8000 },
     { id: "Tramites", nombre: "Permisos, Trámites y Requerimientos", descripcion: "Requisitos legales y tramites", precio: 15000 },
     { id: "Automatizacion", nombre: "Automatizacion de osmosis inversa para producto terminado", descripcion: "Automatizacion", precio: 12000 },
     { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
-  Purificadora3: [
+  PremiumOsmosis: [
     { id: "tinaco-2500", nombre: "Tinacos 2500L", descripcion: "Para almacenamiento", precio: 5000 },
     { id: "tinaco-5000", nombre: "Tinacos 5000L", descripcion: "Para almacenamiento", precio: 8000 },
     { id: "Tramites", nombre: "Permisos, Trámites y Requerimientos", descripcion: "Requisitos legales y tramites", precio: 15000 },
     { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
-  Purificadora4: [
+  PoseidonPro: [
     { id: "tinaco-2500", nombre: "Tinacos 2500L", descripcion: "Para almacenamiento", precio: 5000 },
     { id: "tinaco-5000", nombre: "Tinacos 5000L", descripcion: "Para almacenamiento", precio: 8000 },
     { id: "Tramites", nombre: "Permisos, Trámites y Requerimientos", descripcion: "Requisitos legales y tramites", precio: 15000 },
     { id: "Automatizacion", nombre: "Automatizacion de osmosis inversa para producto terminado", descripcion: "Automatizacion", precio: 12000 },
     { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
   Atlantis: [
     { id: "tinaco-2500", nombre: "Tinaco 2500L", descripcion: "Para almacenamiento", precio: 5000 },
@@ -40,6 +44,7 @@ const extrasPorMaquina = {
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
     { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
     { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
   Megalodon: [
     { id: "tinaco-2500", nombre: "Tinaco 2500L", descripcion: "Para almacenamiento", precio: 5000 },
@@ -49,6 +54,7 @@ const extrasPorMaquina = {
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
     { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
     { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
   AtlantisMax: [
     { id: "tinaco-uno", nombre: "Tinaco 5000L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 9000 },
@@ -58,6 +64,7 @@ const extrasPorMaquina = {
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
     { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
     { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
   MegalodonMax: [
     { id: "tinaco-uno", nombre: "Tinaco 5000L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 9000 },
@@ -67,6 +74,27 @@ const extrasPorMaquina = {
     { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
     { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
     { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
+  ],
+  MegalodonMaxTouch: [
+    { id: "tinaco-uno", nombre: "Tinaco 5000L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 9000 },
+    { id: "tinaco-dos", nombre: "Tinaco 2500L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 7000 },
+    { id: "permisos", nombre: "Permisos y Trámites", descripcion: "Requisitos legales incluidos", precio: 3000 },
+    { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
+    { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
+    { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
+    { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
+  ],
+  AtlantisTouch: [
+    { id: "tinaco-uno", nombre: "Tinaco 5000L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 9000 },
+    { id: "tinaco-dos", nombre: "Tinaco 2500L y 2500L", descripcion: "Para agua cruda y producto terminado", precio: 7000 },
+    { id: "permisos", nombre: "Permisos y Trámites", descripcion: "Requisitos legales incluidos", precio: 3000 },
+    { id: "Kit", nombre: "Insumos anuales", descripcion: "Kit de insumos anuales", precio: 2500 },
+    { id: "Plan", nombre: "Plan de mantenimiento ", descripcion: "Plan de mantenimiento anual", precio: 4500 },
+    { id: "Disenos", nombre: "Diseños de logotipos", descripcion: "Diseño de logotipo", precio: 2000 },
+    { id: "Volantes", nombre: "Volantes publicitarios", descripcion: "Diseño y creación de volantes publicitarios", precio: 1500 },
+    { id: "agua-alcalina", nombre: "Agua alcalina", descripcion: "Sistema de producción de agua alcalina", precio: 12000 },
   ],
   Vending5: [
     { id: "permisos", nombre: "Permisos y Trámites", descripcion: "Requisitos legales incluidos", precio: 3000 },
@@ -80,6 +108,8 @@ const extrasPorMaquina = {
     { id: "Rack", nombre: "Rack para bidones ", descripcion: "Rack para bidones", precio: 8000 },
   ],
 };
+
+
 
 export default function Step3ExtrasConfigurator({ selectedModelId, onSelect, onNext, onBack }) {
   const extras = extrasPorMaquina[selectedModelId] || [];

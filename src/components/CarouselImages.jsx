@@ -1,50 +1,52 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // Si usas lucide-react, opcional
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function CarouselImages({ images }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Auto-cambio cada 3 segundos
   useEffect(() => {
     const timer = setInterval(() => {
       handleNext();
-    }, 3000);
+    }, 5000); // Cambia cada 5s
     return () => clearInterval(timer);
   }, [currentIndex]);
 
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    setCurrentIndex((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
     );
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    setCurrentIndex((prev) =>
+      prev === images.length - 1 ? 0 : prev + 1
     );
   };
 
+  if (!images || images.length === 0) return null;
+
   return (
-    <div className="relative w-full max-w-3xl h-80 rounded-3xl overflow-hidden shadow-2xl mx-auto">
+    <div className="relative w-full max-w-4xl h-[400px] md:h-[500px] overflow-hidden rounded-3xl shadow-xl border mx-auto group">
       <img
         src={images[currentIndex]}
         alt={`Imagen ${currentIndex + 1}`}
-        className="w-full h-full object-cover transition-all duration-700"
+        className="w-full h-full object-contain transition-all duration-700 ease-in-out bg-white"
       />
 
-      {/* Botones izquierda y derecha */}
+      {/* Botón Izquierda */}
       <button
         onClick={handlePrev}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black transition-opacity opacity-0 group-hover:opacity-100"
       >
-        <ChevronLeft />
+        <ChevronLeft size={24} />
       </button>
 
+      {/* Botón Derecha */}
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/40 text-white p-2 rounded-full hover:bg-black/60"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black transition-opacity opacity-0 group-hover:opacity-100"
       >
-        <ChevronRight />
+        <ChevronRight size={24} />
       </button>
 
       {/* Dots de navegación */}
@@ -53,8 +55,8 @@ export default function CarouselImages({ images }) {
           <div
             key={index}
             onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full cursor-pointer ${
-              index === currentIndex ? "bg-white" : "bg-gray-400"
+            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
+              index === currentIndex ? "bg-[#24d4da]" : "bg-gray-400"
             }`}
           />
         ))}
