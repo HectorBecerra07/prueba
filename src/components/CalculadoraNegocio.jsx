@@ -3,8 +3,16 @@ import React, { useState } from "react";
 export default function CalculadoraNegocio() {
   const [tipo, setTipo] = useState("agua");
 
+  // Fondo dinámico por tipo
+  const bgClass =
+    tipo === "limpieza"
+      ? "bg-gradient-to-b from-pink-400 via-fuchsia-500 to-rose-500"
+      : "bg-gradient-to-b from-cyan-400 to-teal-500";
+
   return (
-    <section className="min-h-screen bg-gradient-to-b from-cyan-400 to-teal-500 flex flex-col items-center justify-center w-full p-4 md:p-10 gap-6 overflow-hidden">
+    <section
+      className={`min-h-screen ${bgClass} flex flex-col items-center justify-center w-full p-4 md:p-10 gap-6 overflow-hidden`}
+    >
       <h1 className="text-3xl md:text-5xl font-extrabold text-white drop-shadow text-center">
         CALCULADORA DE GANANCIAS
       </h1>
@@ -58,7 +66,9 @@ function CalculadoraAgua() {
   return (
     <div className="w-full flex flex-col md:flex-row rounded-3xl overflow-hidden shadow-2xl">
       <div className="bg-white p-6 md:p-10 space-y-4 text-gray-800 md:w-1/2">
-        <h2 className="text-xl md:text-2xl font-bold text-center">Agua - Configura tu Negocio</h2>
+        <h2 className="text-xl md:text-2xl font-bold text-center">
+          Agua - Configura tu Negocio
+        </h2>
 
         <input
           type="range"
@@ -68,7 +78,9 @@ function CalculadoraAgua() {
           onChange={(e) => setPrecioGarrafon(Number(e.target.value))}
           className="w-full accent-lime-300"
         />
-        <p className="text-center text-2xl font-extrabold text-lime-400">${precioGarrafon}</p>
+        <p className="text-center text-2xl font-extrabold text-lime-400">
+          ${precioGarrafon}
+        </p>
 
         <div className="space-y-3">
           <Input label="Garrafones por día" value={garrafonesDia} setValue={setGarrafonesDia} />
@@ -88,6 +100,7 @@ function CalculadoraAgua() {
 
       <div className="md:w-1/2">
         <Resultados
+          theme="aqua" // <- tarjetas con degradado cian/teal
           ingresosDiarios={ingresosDiarios}
           gastosDiarios={gastosDiarios}
           utilidadDiaria={utilidadDiaria}
@@ -120,15 +133,18 @@ function CalculadoraProductos() {
       <div className="bg-white p-6 md:p-10 space-y-4 text-gray-800 md:w-1/2">
         <h2 className="text-xl md:text-2xl font-bold text-center">Productos de Limpieza</h2>
 
+        {/* Acento ROSA en slider y valor */}
         <input
           type="range"
           min="10"
           max="100"
           value={precioLitro}
           onChange={(e) => setPrecioLitro(Number(e.target.value))}
-          className="w-full accent-lime-300"
+          className="w-full accent-rose-400"
         />
-        <p className="text-center text-2xl font-extrabold text-lime-400">${precioLitro}</p>
+        <p className="text-center text-2xl font-extrabold text-rose-300">
+          ${precioLitro}
+        </p>
 
         <div className="space-y-3">
           <Input label="Litros por día" value={litrosDia} setValue={setLitrosDia} />
@@ -140,6 +156,7 @@ function CalculadoraProductos() {
 
       <div className="md:w-1/2">
         <Resultados
+          theme="rose" // <- tarjetas con degradado ROSA
           ingresosDiarios={ingresosDiarios}
           gastosDiarios={gastosDiarios}
           utilidadDiaria={utilidadDiaria}
@@ -173,6 +190,7 @@ function Input({ label, value, setValue }) {
 }
 
 function Resultados({
+  theme = "aqua", // 'aqua' | 'rose'
   ingresosDiarios,
   gastosDiarios,
   utilidadDiaria,
@@ -187,14 +205,26 @@ function Resultados({
     { label: "Anual", valor: utilidadAnual },
   ];
 
+  // Degradado de tarjetas según tema
+  const tileGradient =
+    theme === "rose"
+      ? "from-pink-400 via-fuchsia-500 to-rose-500"
+      : "from-cyan-400 to-teal-500";
+
+  // Color de título "Resultados" (puedes cambiar a rosa si prefieres)
+  const titleClass =
+    theme === "rose" ? "text-rose-300" : "text-lime-300";
+
   return (
     <div className="p-6 md:p-10 bg-[#021D39] text-white flex flex-col justify-center space-y-4 h-full">
-      <h2 className="text-2xl md:text-3xl font-bold text-lime-300 text-center">Resultados</h2>
+      <h2 className={`text-2xl md:text-3xl font-bold ${titleClass} text-center`}>
+        Resultados
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
         {datos.map((dato) => (
           <div
             key={dato.label}
-            className="bg-gradient-to-tr from-cyan-400 to-teal-500 p-4 rounded-2xl text-center shadow-lg"
+            className={`bg-gradient-to-tr ${tileGradient} p-4 rounded-2xl text-center shadow-lg`}
           >
             <p className="text-base font-semibold text-white/80">{dato.label}</p>
             <p className="text-2xl font-extrabold text-white drop-shadow">

@@ -31,6 +31,7 @@ import VendingLimpiezaInfo from "./pages/VendingLimpiezaInfo";
 import Videos from "./pages/Videos";
 import VideoDetalle from "./pages/VideoDetalle";
 import NotFound from "./pages/NotFound";
+import PurificadoresCaseros from "./components/PurificadoresCaseros";
 
 // Admin
 import LoginAdmin from "./administrador/LoginAdmin";
@@ -46,6 +47,7 @@ const PageWrapper = ({ children }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -100,11 +102,16 @@ function AppContent() {
                   <Route path="/videos/:id" element={<PageWrapper><VideoDetalle /></PageWrapper>} />
                   <Route path="/configurar/:id" element={<PageWrapper><Configurar /></PageWrapper>} />
                   <Route path="/configurar-maquina/:id" element={<PageWrapper><WizardGeneral /></PageWrapper>} />
-                  <Route path="/carrito" element={
-                    <Elements stripe={stripePromise}>
-                      <PageWrapper><Carrito /></PageWrapper>
-                    </Elements>
-                  } />
+                  <Route
+                    path="/carrito"
+                    element={
+                      <Elements stripe={stripePromise}>
+                        <PageWrapper><Carrito /></PageWrapper>
+                      </Elements>
+                    }
+                  />
+                  {/* 👇 Nueva ruta agregada */}
+                  <Route path="/PurificadoresCaseros" element={<PageWrapper><PurificadoresCaseros /></PageWrapper>} />
                   <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
                 </Routes>
               </Layout>

@@ -3,8 +3,7 @@ import React, { useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import IniciaNegocio from "../pages/IniciaNegocio";
 import CalculadoraNegocio from "./CalculadoraNegocio";
-import CarruselImagenes from "./CarruselImagenes";
-import PurificadoresCaseros from "./PurificadoresCaseros";
+import Carruselimg from "./Carruselimg";
 
 export default function LandingPage() {
   const inicioRef = useRef(null);
@@ -84,7 +83,7 @@ export default function LandingPage() {
         <IniciaNegocio />
       </div>
 
-      <CarruselImagenes />
+      <Carruselimg/>
 
       <div ref={calculadoraRef} className="scroll-mt-1">
         <CalculadoraNegocio />
