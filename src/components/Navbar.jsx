@@ -144,7 +144,7 @@ export default function NavBar() {
                 NOSOTROS
               </Link>
             </li>
-            {/* No mostramos "Cerrar Sesión" en móvil para evitar duplicidad si ya lo tienes en otra parte */}
+           
           </ul>
         </div>
       </nav>
